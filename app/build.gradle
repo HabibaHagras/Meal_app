@@ -52,6 +52,9 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.4.1"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+    implementation "com.airbnb.android:lottie:3.7.0"
+
+
 
 
 }

@@ -7,16 +7,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 
 public class SplashScreen extends AppCompatActivity {
-
+    LottieAnimationView lottieAnimationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
+        lottieAnimationView=findViewById(R.id.animationView);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -32,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
                 // our current activity.
                 finish();
             }
-        }, 2000);
+        }, 14000);
 
 
     }

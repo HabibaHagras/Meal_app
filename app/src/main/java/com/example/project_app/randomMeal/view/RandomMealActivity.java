@@ -5,13 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.project_app.MainActivity;
 import com.example.project_app.R;
+import com.example.project_app.databinding.ActivityMainBinding;
 import com.example.project_app.dp.AppDataBase;
 import com.example.project_app.dp.MealDAO;
 import com.example.project_app.dp.MealLocalDataSourceIm;
+import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepositoryIm;
@@ -19,6 +23,7 @@ import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
 import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +40,8 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     List<Meal> mealList;
     AllMealPresenter allMealPresenter;
     CategoryAdapter categoryAdapter;
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,32 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                 ),this);
         allMealPresenter.getMeal();
         allMealPresenter.getCtegory();
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.buttom_dashboard);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (item.getItemId()==R.id.buttom_dashboard){
+                return true;
+            }
+            else if (item.getItemId()==R.id.bottomhome) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+                return true;
+            }
+            else if(item.getItemId()==R.id.bottom_fav) {
+                startActivity(new Intent(getApplicationContext(), FavActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+                return true;
+            }
+            else {
+                return false;
+            }
+        });
+
 
     }
 

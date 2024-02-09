@@ -96,13 +96,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     @Override
     public void oPutInFavClick(Meal meal) {
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
-//        new  Thread(){
-//            @Override
-//            public void run() {
-//                DAO.insert(product);
-//            }
-//        }.start();
-//        productAdapter .notifyDataSetChanged();
         addProduct(meal);
     }
 }

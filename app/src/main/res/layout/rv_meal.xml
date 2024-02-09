@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/random_meal_card"
+    android:id="@+id/fav_meal_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/purple_200"
@@ -38,5 +38,18 @@
             android:layout_toEndOf="@+id/imageView"
             android:text="Name"
             android:textColor="@android:color/black" />
+        <ImageButton
+            android:id="@+id/fav_button"
+            android:layout_width="99dp"
+            android:layout_height="49dp"
+            android:layout_alignTop="@+id/Name_of_meal"
+            android:layout_alignEnd="@+id/Name_of_meal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="-44dp"
+            android:layout_marginBottom="8dp"
+            android:background="#02FFFFFF"
+            android:contentDescription="fav"
+            app:srcCompat="@drawable/favorite_white_24dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

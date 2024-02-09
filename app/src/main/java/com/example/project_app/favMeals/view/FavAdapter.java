@@ -1,6 +1,4 @@
-package com.example.project_app.randomMeal.view;
-
-
+package com.example.project_app.favMeals.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,31 +19,31 @@ import com.example.project_app.model.Meal;
 import java.util.ArrayList;
 import java.util.List;
 
-public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
+public class  FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder>  {
 
 
     Context context;
-    List<Meal> products;
-    private  PutInFavListener listner;
+    List<Meal> meals;
+    private OnClickFavListener listner;
 
-    public RycAdapter(Context context, List<Meal> products ,PutInFavListener _listener){
+    public FavAdapter(Context context, List<Meal> meals ,OnClickFavListener _lister){
         this.context = context;
-        this.products = products;
-        this.listner=_listener;
-        products=new ArrayList<>();
+        this.meals = meals;
+        this.listner=_lister;
+        meals=new ArrayList<Meal>();
 
     }
     public  void SetList(List<Meal>updateProducts){
-        this.products=updateProducts;
-        notifyDataSetChanged();
+        this.meals=updateProducts;
+
 
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FavAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.rv_meal,parent,false);
+        View view = inflater.inflate(R.layout.fav_meal,parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -54,41 +52,42 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Meal product = products.get(position);
-        holder.tvTitle.setText("Title of Meal :  " +products.get(position).getStrMeal());
-
-        Glide.with(context).load(products.get(position).getStrMealThumb()).into(holder.img);
-        holder.Fav.setOnClickListener(new View.OnClickListener() {
+        Meal product = meals.get(position);
+        holder.tvTitle.setText("Title of Meal :  " +meals.get(position).getStrMeal());
+        Glide.with(context).load(meals.get(position).getStrMealThumb()).into(holder.img);
+        holder.Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listner.oPutInFavClick(product);
+                listner.onFavProductClick(product);
 
             }
         });
+
 
     }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return meals.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
-
+        TextView tvPrice;
+        TextView tvBrand;
+        TextView tvDesc;
         ImageView img;
-
-        ImageButton Fav;
+        TextView ratingBar;
+        ImageButton Delete;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.Name_of_meal);
-            img=itemView.findViewById(R.id.imageView);
-            Fav=itemView.findViewById(R.id.fav_button);
-
-
-
+            tvTitle = itemView.findViewById(R.id.Name_of_fav_meal);
+            img=itemView.findViewById(R.id.imageViewfav);
+            Delete=itemView.findViewById(R.id.delete_fav_button);
 
         }
     }}
+
+

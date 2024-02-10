@@ -2,6 +2,7 @@ package com.example.project_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
@@ -18,13 +19,18 @@ import com.example.project_app.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
+    String currentUserEmail;
+    Boolean isUserLoggedIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
+        // Display the email in a TextView (replace with your actual UI elements)
+        TextView userEmailTextView = findViewById(R.id.userEmailTextView);
+        userEmailTextView.setText("Welcome, " + currentUserEmail);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.bottomhome);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -32,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
                else if (item.getItemId()==R.id.buttom_dashboard) {
-                    startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                   // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
+                intent.putExtra("currentUserEmail", currentUserEmail);
+                startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;

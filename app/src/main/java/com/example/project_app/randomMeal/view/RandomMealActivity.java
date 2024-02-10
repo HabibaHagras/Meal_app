@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.project_app.LoginActivity;
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 import com.example.project_app.databinding.ActivityMainBinding;
+import com.example.project_app.databinding.ActivityRandomMealBinding;
 import com.example.project_app.dp.AppDataBase;
 import com.example.project_app.dp.MealDAO;
 import com.example.project_app.dp.MealLocalDataSourceIm;
@@ -40,12 +42,18 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     List<Meal> mealList;
     AllMealPresenter allMealPresenter;
     CategoryAdapter categoryAdapter;
-    private ActivityMainBinding binding;
+    private ActivityRandomMealBinding binding;
+    String currentUserEmail;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityRandomMealBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setContentView(R.layout.activity_random_meal);
+        currentUserEmail = getIntent().getStringExtra("currentUserEmail");
+
         recyclerView = findViewById(R.id.rv_meals);
         recyclerViewofCategory=findViewById(R.id.rv_categories);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -70,8 +78,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         allMealPresenter.getMeal();
         allMealPresenter.getCtegory();
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.buttom_dashboard);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -85,7 +91,10 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                 return true;
             }
             else if(item.getItemId()==R.id.bottom_fav) {
-                startActivity(new Intent(getApplicationContext(), FavActivity.class));
+                //startActivity(new Intent(getApplicationContext(), FavActivity.class));
+                Intent intent = new Intent(getApplicationContext(), FavActivity.class);
+                intent.putExtra("currentUserEmail", currentUserEmail);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;
@@ -128,6 +137,8 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void oPutInFavClick(Meal meal) {
+        meal.setUserEmail(currentUserEmail); // Replace currentUserEmail with the actual user's email
+
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
     }

@@ -22,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 // on below line we are
                 // creating a new intent
-                Intent i = new Intent(SplashScreen.this, SignupActivity.class);
+                Intent i = new Intent(SplashScreen.this, AuthActivity.class);
 
                 // on below line we are
                 // starting a new activity.
@@ -32,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
                 // our current activity.
                 finish();
             }
-        }, 14000);
+        }, 9000);
 
 
     }

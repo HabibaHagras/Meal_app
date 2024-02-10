@@ -5,9 +5,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project_app.model.Meal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,12 +25,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.time.Clock;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText loginEmail, loginPassword;
     private TextView signupRedirectText;
     private Button loginButton;
     private FirebaseAuth auth;
     TextView forgotPassword;
+    SharedPreferences sp;
+    Meal meal ;
+    String currentUserEmail;
+    Boolean isUserLoggedIn;
+
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         signupRedirectText = findViewById(R.id.signUpRedirectText);
         forgotPassword = findViewById(R.id.forgot_password);
         auth = FirebaseAuth.getInstance();
+        sp=getSharedPreferences("useremail",MODE_PRIVATE);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,8 +62,18 @@ public class LoginActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
+                                        SharedPreferences.Editor editor=sp.edit();
+                                        String currentUserEmail = auth.getCurrentUser().getEmail();
+                                        Log.i(TAG, "onSuccess: currentUserEmail");
                                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                                        meal=new Meal();
+//                                        // Set other meal details
+//                                        meal.setUserEmail(currentUserEmail);
+                                        editor.putString("userEmail",currentUserEmail);
+                                        editor.commit();
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        intent.putExtra("currentUserEmail", currentUserEmail);
+                                        startActivity(intent);
                                         finish();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

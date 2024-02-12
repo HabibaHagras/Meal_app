@@ -51,5 +51,19 @@
             android:background="#02FFFFFF"
             android:contentDescription="fav"
             app:srcCompat="@drawable/favorite_white_24dp" />
+
+        <ImageButton
+            android:id="@+id/olan_button"
+            android:layout_width="99dp"
+            android:layout_height="49dp"
+
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toStartOf="@+id/fav_button"
+            android:background="#02FFFFFF"
+            android:contentDescription="plan"
+            app:srcCompat="@drawable/favorite_white_24dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

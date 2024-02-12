@@ -35,6 +35,16 @@ public class Meal {
 
     @ColumnInfo(name = "userEmail")
     private String userEmail;
+    @ColumnInfo(name = "day")
+    private String day;
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public String getUserEmail() {
         return userEmail;

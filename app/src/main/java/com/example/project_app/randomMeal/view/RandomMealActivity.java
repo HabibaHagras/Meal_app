@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.project_app.DayActivity;
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 import com.example.project_app.databinding.ActivityRandomMealBinding;
@@ -143,5 +144,15 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
+    }
+
+    @Override
+    public void OnPlanClick(Meal meal) {
+//        meal.setUserEmail(email); // Replace currentUserEmail with the actual user's email
+
+        Toast.makeText(RandomMealActivity.this,"pls choose day",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+        startActivity(intent);
+      //  addProduct(meal);
     }
 }

@@ -65,6 +65,13 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
 
             }
         });
+        holder.Plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listner.OnPlanClick(product);
+
+            }
+        });
 
     }
 
@@ -80,12 +87,14 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
         ImageView img;
 
         ImageButton Fav;
+        ImageButton Plan;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.Name_of_meal);
             img=itemView.findViewById(R.id.imageView);
             Fav=itemView.findViewById(R.id.fav_button);
+            Plan=itemView.findViewById(R.id.olan_button);
 
 
 

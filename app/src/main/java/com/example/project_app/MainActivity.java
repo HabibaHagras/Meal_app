@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.project_app.favMeals.view.FavActivity;
+import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -52,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     return true;
                 }
+            else if(item.getItemId()==R.id.planbotton) {
+                startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+                return true;
+            }
                 else {
                     return false;
                 }

@@ -26,6 +26,7 @@ import com.example.project_app.model.Repository;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
+import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -96,6 +97,12 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
             }
             else if(item.getItemId()==R.id.buttom_dashboard) {
                 startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+                return true;
+            }
+            else if(item.getItemId()==R.id.planbotton) {
+                startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

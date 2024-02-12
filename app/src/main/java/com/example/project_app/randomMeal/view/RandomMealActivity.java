@@ -24,6 +24,7 @@ import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
+import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -98,6 +99,12 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                 Intent intent = new Intent(getApplicationContext(), FavActivity.class);
                 intent.putExtra("currentUserEmail", currentUserEmail);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+                return true;
+            }
+            else if(item.getItemId()==R.id.planbotton) {
+                startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

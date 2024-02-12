@@ -15,7 +15,10 @@
         android:theme="@style/Theme.Project_App"
         tools:targetApi="31">
         <activity
-            android:name=".plan.view.PlanDay"
+            android:name=".plan.view.Day_PlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".plan.view.PlanDayActivity"
             android:exported="false" />
         <activity
             android:name=".Day.view.DayActivity"

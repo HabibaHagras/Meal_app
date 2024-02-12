@@ -18,7 +18,7 @@
         android:layout_height="113dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewPlan"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
@@ -26,7 +26,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/Name_of_meal"
+            android:id="@+id/Name_of_plan_meal"
             android:layout_width="177dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -35,35 +35,25 @@
             android:layout_marginStart="44dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="48dp"
-            android:layout_toEndOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageViewPlan"
             android:text="Name"
             android:textColor="@android:color/black" />
+
         <ImageButton
-            android:id="@+id/fav_button"
+            android:id="@+id/delete_plan_button"
             android:layout_width="99dp"
             android:layout_height="49dp"
-            android:layout_alignTop="@+id/Name_of_meal"
-            android:layout_alignEnd="@+id/Name_of_meal"
+            android:layout_alignTop="@+id/Name_of_plan_meal"
+            android:layout_alignEnd="@+id/Name_of_plan_meal"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="-44dp"
             android:layout_marginBottom="8dp"
             android:background="#02FFFFFF"
-            android:contentDescription="fav"
-            app:srcCompat="@drawable/favorite_white_24dp" />
+            android:contentDescription="Delete"
+            app:srcCompat="@drawable/delete_black_24dp" />
 
-        <ImageButton
-            android:id="@+id/plan_button"
-            android:layout_width="99dp"
-            android:layout_height="49dp"
-            android:layout_alignTop="@+id/Name_of_meal"
-            android:layout_alignEnd="@+id/Name_of_meal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="1dp"
-            android:background="#02FFFFFF"
-            android:contentDescription="fav"
-            app:srcCompat="@drawable/favorite_white_24dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
+
+

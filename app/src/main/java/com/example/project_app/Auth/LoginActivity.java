@@ -1,4 +1,4 @@
-package com.example.project_app;
+package com.example.project_app.Auth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project_app.MainActivity;
+import com.example.project_app.R;
 import com.example.project_app.model.Meal;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -24,8 +26,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.time.Clock;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText loginEmail, loginPassword;

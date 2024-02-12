@@ -1,4 +1,4 @@
-package com.example.project_app;
+package com.example.project_app.Auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.project_app.randomMeal.view.RandomMealActivity;
+import com.example.project_app.R;
 
 public class AuthActivity extends AppCompatActivity {
     Button login ;

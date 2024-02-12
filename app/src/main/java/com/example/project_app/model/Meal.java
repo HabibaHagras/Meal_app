@@ -17,6 +17,10 @@ public class Meal {
     @ColumnInfo(name = "strDrinkAlternate")
 
     String strDrinkAlternate;
+    @ColumnInfo(name = "day")
+
+    String day;
+
     @ColumnInfo(name = "strCategory")
 
     String strCategory;
@@ -45,6 +49,14 @@ public class Meal {
     }
     public Meal() {
         // Empty constructor required by Room
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public Meal(String idMeal, String strMeal, String strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, String strIngredient16, String strIngredient17, String strIngredient18, String strIngredient19, String strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, String strMeasure16, String strMeasure17, String strMeasure18, String strMeasure19, String strMeasure20, String strSource, String strImageSource, String strCreativeCommonsConfirmed, String dateModified) {
@@ -663,108 +675,6 @@ public class Meal {
     public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
-    /*
-    @PrimaryKey
-    @NonNull
-    int id;
-    @ColumnInfo(name = "title")
-    String title ;
-    @ColumnInfo(name = "productPrice")
-    @SerializedName("price")
 
-    double productPrice ;
-    @ColumnInfo(name = "productBrand")
 
-     @SerializedName("brand")
-    String productBrand ;
-    @ColumnInfo(name = "productcategory")
-    @SerializedName("category")
-
-    String productcategory;
-    @ColumnInfo(name = "productthumbnail")
-    @SerializedName("thumbnail")
-
-    String productthumbnail ;
-    @ColumnInfo(name = "rating")
-
-    Double rating;
-
-    public Product(int id ,String title, double productPrice, String productBrand, String productcategory, String productthumbnail, String productimages , Double rating) {
-        this.id = id ;
-        this.title = title;
-        this.productPrice = productPrice;
-        this.productBrand = productBrand;
-        this.productcategory = productcategory;
-        this.rating =rating;
-        this.productthumbnail = productthumbnail;
-        this.productimages = productimages;
-    }
-
-    String productimages ;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public double getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public String getProductBrand() {
-        return productBrand;
-    }
-
-    public void setProductBrand(String productBrand) {
-        this.productBrand = productBrand;
-    }
-
-    public String getProductcategory() {
-        return productcategory;
-    }
-
-    public void setProductcategory(String productcategory) {
-        this.productcategory = productcategory;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
-    public String getProductthumbnail() {
-        return productthumbnail;
-    }
-
-    public void setProductthumbnail(String productthumbnail) {
-        this.productthumbnail = productthumbnail;
-    }
-
-    public String getProductimages() {
-        return productimages;
-    }
-
-    public void setProductimages(String productimages) {
-        this.productimages = productimages;
-    }
-
-     */
 }

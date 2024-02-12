@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/bottomplan"
+        android:icon="@drawable/baseline_lock_24"
+        android:title="plan" />
+    <item
         android:id="@+id/bottomhome"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />

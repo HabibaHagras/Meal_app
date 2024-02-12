@@ -4,6 +4,7 @@ import java.util.List;
 
 public class mealResponse {
     List<Meal> meals;
+    List<MealPlan>mealPlans;
 
     public List<Meal> getMeals() {
         return meals;
@@ -12,4 +13,8 @@ public class mealResponse {
     public void setProducts(List<Meal> products) {
         this.meals = products;
     }
+    public List<MealPlan> getMealsPlan() {
+        return mealPlans;
+    }
+
 }

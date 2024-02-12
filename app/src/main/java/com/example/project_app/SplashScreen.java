@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.WindowManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.project_app.randomMeal.view.RandomMealActivity;
+import com.example.project_app.Auth.AuthActivity;
 
 public class SplashScreen extends AppCompatActivity {
     LottieAnimationView lottieAnimationView;

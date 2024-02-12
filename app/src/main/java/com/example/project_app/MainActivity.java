@@ -22,48 +22,70 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     String currentUserEmail;
     Boolean isUserLoggedIn;
+    Boolean skip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
-        // Display the email in a TextView (replace with your actual UI elements)
+        currentUserEmail = getIntent().getStringExtra("currentUserEmail");
+        skip = getIntent().getBooleanExtra("skip",false);
         TextView userEmailTextView = findViewById(R.id.userEmailTextView);
         userEmailTextView.setText("Welcome, " + currentUserEmail);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.bottomhome);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId()==R.id.bottomhome){
-                return true;
-            }
-               else if (item.getItemId()==R.id.buttom_dashboard) {
-                   // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
-                Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
-                intent.putExtra("currentUserEmail", currentUserEmail);
-                startActivity(intent);
+        bottomNavigationView.getMenu().clear();
+        if (skip==true){
+                    bottomNavigationView.inflateMenu(R.menu.guest_menu);
+            bottomNavigationView.setSelectedItemId(R.id.buttom_dashboardguest);
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+//                if (item.getItemId() == R.id.bottomhome) {
+//                    return true;
+//                }   else
+                    if (item.getItemId() == R.id.buttom_dashboardguest) {
+                    // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;
+
                 }
-                else if(item.getItemId()==R.id.bottom_fav) {
+                else {
+                    return false;
+                }
+            });
+        }
+        else {
+            bottomNavigationView.inflateMenu(R.menu.bottom_nav_menu);
+
+            bottomNavigationView.setSelectedItemId(R.id.bottomhome);
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+                if (item.getItemId() == R.id.bottomhome) {
+                    return true;
+                } else if (item.getItemId() == R.id.buttom_dashboard) {
+                    // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
+                    intent.putExtra("currentUserEmail", currentUserEmail);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.bottom_fav) {
                     startActivity(new Intent(getApplicationContext(), FavActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;
-                }
-            else if(item.getItemId()==R.id.planbotton) {
-                startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }
-                else {
+                } else if (item.getItemId() == R.id.planbotton) {
+                    startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                } else {
                     return false;
                 }
-        });
-
+            });
+        }
 ////
 ////        binding = ActivityMainBinding.inflate(getLayoutInflater());
 ////        setContentView(binding.getRoot());

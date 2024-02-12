@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 
 public class AuthActivity extends AppCompatActivity {
     Button login ;
     Button signup;
     Button signin;
+    Button Skip ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,7 @@ public class AuthActivity extends AppCompatActivity {
         login=findViewById(R.id.LoginButton);
         signup=findViewById(R.id.SignupButton);
         signin=findViewById(R.id.containedButton);
+        Skip=findViewById(R.id.Skipbutton);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,6 +35,14 @@ public class AuthActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), SignupActivity.class));
 
+            }
+        });
+        Skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                intent.putExtra("skip", true);
+                startActivity(intent);
             }
         });
     }

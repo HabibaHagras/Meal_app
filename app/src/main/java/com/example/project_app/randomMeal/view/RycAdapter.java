@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.project_app.R;
 import com.example.project_app.model.Meal;
-import com.example.project_app.model.MealPlan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,22 +26,17 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
 
     Context context;
     List<Meal> products;
-    List<MealPlan> products2;
     private  PutInFavListener listner;
-    private  PutInPlanListener listner2;
 
-    public RycAdapter(Context context, List<Meal> products ,PutInFavListener _listener , PutInPlanListener listner2){
+    public RycAdapter(Context context, List<Meal> products ,PutInFavListener _listener){
         this.context = context;
         this.products = products;
         this.listner=_listener;
-        this.listner2=listner2;
         products=new ArrayList<>();
-       // products2=new ArrayList<>();
 
     }
     public  void SetList(List<Meal>updateProducts){
         this.products=updateProducts;
-
         notifyDataSetChanged();
 
     }
@@ -61,7 +55,6 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meal product = products.get(position);
-     //  MealPlan product2 = products2.get(position);
         holder.tvTitle.setText("Title of Meal :  " +products.get(position).getStrMeal());
 
         Glide.with(context).load(products.get(position).getStrMealThumb()).into(holder.img);
@@ -72,7 +65,6 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
 
             }
         });
-
 
     }
 
@@ -88,13 +80,11 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
         ImageView img;
 
         ImageButton Fav;
-        ImageButton Plan;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.Name_of_meal);
             img=itemView.findViewById(R.id.imageView);
-          //  Plan=itemView.findViewById(R.id.plan_button);
             Fav=itemView.findViewById(R.id.fav_button);
 
 

@@ -55,21 +55,4 @@ public class mealRepositoryIm implements mealRepository {
                remoteDataSource.makeNetwokCallCategory(networkCallback);
 
     }
-
-    @Override
-    public LiveData<List<Meal>> getStoredProductPlan(String day_of_week) {
-        return localDataSource.getAllStoredMealsPlan(day_of_week);
-    }
-
-    @Override
-    public void insertMealPlan(Meal mealPlan, String day_of_week) {
-        localDataSource.insertMealPlan(mealPlan,day_of_week);
-
-    }
-
-    @Override
-    public void deleteMealPlan(Meal mealPlan, String day_of_week) {
-        localDataSource.deleteMealPlan(mealPlan,day_of_week);
-
-    }
 }

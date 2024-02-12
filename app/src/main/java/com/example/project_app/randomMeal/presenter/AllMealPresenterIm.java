@@ -2,7 +2,6 @@ package com.example.project_app.randomMeal.presenter;
 
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
-import com.example.project_app.model.MealPlan;
 import com.example.project_app.model.mealRepository;
 import com.example.project_app.network.NetworkCallback;
 import com.example.project_app.randomMeal.view.AllCategoryView;
@@ -38,12 +37,6 @@ public class AllMealPresenterIm implements AllMealPresenter , NetworkCallback {
     @Override
     public void getCtegory() {
         _Repository.getAllCategories(this);
-    }
-
-    @Override
-    public void addtoPlan(Meal mealPlan, String day) {
-        _Repository.insertMealPlan(mealPlan,day);
-
     }
 
     @Override

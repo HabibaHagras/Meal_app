@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -18,11 +20,9 @@ import com.example.project_app.dp.MealLocalDataSourceIm;
 import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
-import com.example.project_app.model.MealPlan;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
-import com.example.project_app.planMeals.view.DayOfWeek;
 import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,7 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomMealActivity extends AppCompatActivity implements   PutInFavListener , AllMealView  ,AllCategoryView , PutInPlanListener{
+public class RandomMealActivity extends AppCompatActivity implements   PutInFavListener , AllMealView  ,AllCategoryView{
     RecyclerView recyclerView;
     RecyclerView recyclerViewofCategory;
     LinearLayoutManager linearLayoutManager;
@@ -44,7 +44,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     CategoryAdapter categoryAdapter;
     private ActivityRandomMealBinding binding;
     String currentUserEmail;
-
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_random_meal);
         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
+         email= sp.getString("userEmail","");
 
         recyclerView = findViewById(R.id.rv_meals);
         recyclerViewofCategory=findViewById(R.id.rv_categories);
@@ -65,7 +67,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerViewofCategory.setLayoutManager(linearLayoutManager1);
         mealClient=mealClient.getInstance();
-        productAdapter = new RycAdapter(this, new ArrayList<>(),this,this);
+        productAdapter = new RycAdapter(this, new ArrayList<>(),this);
         recyclerView.setAdapter(productAdapter);
         categoryAdapter = new CategoryAdapter(this, new ArrayList<>(),this);
         recyclerViewofCategory.setAdapter(categoryAdapter);
@@ -99,12 +101,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                 finish();
                 return true;
             }
-            else if(item.getItemId()==R.id.bottomplan) {
-                startActivity(new Intent(getApplicationContext(), DayOfWeek.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }
             else {
                 return false;
             }
@@ -118,8 +114,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         productAdapter.SetList(products);
         productAdapter.notifyDataSetChanged();
     }
-
-
 
     @Override
     public void showErrorMsg(String error) {
@@ -137,12 +131,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     }
 
     @Override
-    public void addProuductPlan(Meal mealPlan, String day) {
-        allMealPresenter.addtoPlan(mealPlan,day);
-
-    }
-
-    @Override
     public void showdataCategory(List<Category> categories) {
         categoryAdapter.SetList(categories);
         categoryAdapter.notifyDataSetChanged();
@@ -151,18 +139,9 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void oPutInFavClick(Meal meal) {
-        meal.setUserEmail(currentUserEmail); // Replace currentUserEmail with the actual user's email
+        meal.setUserEmail(email); // Replace currentUserEmail with the actual user's email
 
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
-    }
-
-    @Override
-    public void oPutInPlanClick(MealPlan mealPlan,String day) {
-//        MealPlan  mealPlan2 = null;
-//        mealPlan.setDayOfWeek(day);
-//        Toast.makeText(RandomMealActivity.this,"added to plan "+ " "+day+" ",Toast.LENGTH_SHORT).show();
-//        addProuductPlan(mealPlan ,day );
-
     }
 }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.project_app.favMeals.view.FavActivity;
-import com.example.project_app.planMeals.view.DayOfWeek;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -47,17 +46,12 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     return true;
                 }
-            else if(item.getItemId()==R.id.bottom_fav) {
-                startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }     else if(item.getItemId()==R.id.bottomplan) {
-                startActivity(new Intent(getApplicationContext(), DayOfWeek.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }
+                else if(item.getItemId()==R.id.bottom_fav) {
+                    startActivity(new Intent(getApplicationContext(), FavActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                }
                 else {
                     return false;
                 }

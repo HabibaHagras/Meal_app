@@ -51,19 +51,5 @@
             android:background="#02FFFFFF"
             android:contentDescription="fav"
             app:srcCompat="@drawable/favorite_white_24dp" />
-
-        <ImageButton
-            android:id="@+id/plan_button"
-            android:layout_width="99dp"
-            android:layout_height="49dp"
-            android:layout_alignTop="@+id/Name_of_meal"
-            android:layout_alignEnd="@+id/Name_of_meal"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="1dp"
-            android:background="#02FFFFFF"
-            android:contentDescription="fav"
-            app:srcCompat="@drawable/favorite_white_24dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

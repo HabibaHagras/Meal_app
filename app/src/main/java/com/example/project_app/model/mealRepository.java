@@ -12,8 +12,5 @@ public interface mealRepository {
     public  void  deleteMeal(Meal meal);
     public void getAllMeals(NetworkCallback networkCallback);
     public void getAllCategories(NetworkCallback networkCallback);
-    public LiveData<List<Meal>> getStoredProductPlan(String day_of_week);
-    public void  insertMealPlan(Meal mealPlan,String day_of_week);
-    public  void  deleteMealPlan(Meal mealPlan,String day_of_week);
 
 }

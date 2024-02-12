@@ -55,4 +55,10 @@ public class mealRepositoryIm implements mealRepository {
                remoteDataSource.makeNetwokCallCategory(networkCallback);
 
     }
+
+    @Override
+    public void insertMeal(Meal meal, String DAY) {
+        localDataSource.insertMealPlan(meal,DAY);
+
+    }
 }

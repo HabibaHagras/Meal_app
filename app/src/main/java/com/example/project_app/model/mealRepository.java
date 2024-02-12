@@ -12,5 +12,7 @@ public interface mealRepository {
     public  void  deleteMeal(Meal meal);
     public void getAllMeals(NetworkCallback networkCallback);
     public void getAllCategories(NetworkCallback networkCallback);
+    public void  insertMeal(Meal meal,String DAY);
+
 
 }

@@ -10,4 +10,7 @@ public interface MealLocalDataSource {
     void insertMeal(Meal meal);
     void  deleteMeal(Meal meal);
     LiveData<List<Meal>> getAllStoredMeals();
+    void insertMealPlan(Meal meal,String day);
+
+
 }

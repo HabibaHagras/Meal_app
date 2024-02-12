@@ -53,4 +53,15 @@ public  static MealLocalDataSourceIm getInstance(Context context){
     public LiveData<List<Meal>> getAllStoredMeals() {
         return storedMeals;
     }
+
+    @Override
+    public void insertMealPlan(Meal meal, String day) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dao.insert(meal);
+            }
+        }).start();
+
+    }
 }

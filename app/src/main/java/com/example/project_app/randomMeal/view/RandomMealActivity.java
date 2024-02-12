@@ -11,7 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.project_app.DayActivity;
+import com.example.project_app.Day.view.DayActivity;
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 import com.example.project_app.databinding.ActivityRandomMealBinding;
@@ -152,6 +152,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
         Toast.makeText(RandomMealActivity.this,"pls choose day",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+        intent.putExtra("MEAL_OBJECT_KEY", meal);
         startActivity(intent);
       //  addProduct(meal);
     }

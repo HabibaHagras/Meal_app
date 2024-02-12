@@ -6,8 +6,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName="meal_table")
-public class Meal {
+public class Meal implements Serializable {
     @PrimaryKey
     @NonNull
     String idMeal;

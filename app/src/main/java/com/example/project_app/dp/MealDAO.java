@@ -21,4 +21,5 @@ public interface MealDAO {
     void delete (Meal meal);
     @Query("SELECT * FROM meal_table WHERE userEmail = :userEmail")
     LiveData<List<Meal>> getFavoriteMealsForUser(String userEmail);
+
 }

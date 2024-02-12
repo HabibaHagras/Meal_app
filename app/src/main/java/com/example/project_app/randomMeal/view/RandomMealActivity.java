@@ -47,6 +47,8 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     private ActivityRandomMealBinding binding;
     String currentUserEmail;
     String email;
+    Boolean skip;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,38 +83,59 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                 ),this);
         allMealPresenter.getMeal();
         allMealPresenter.getCtegory();
-
+        skip = getIntent().getBooleanExtra("skip",false);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setSelectedItemId(R.id.buttom_dashboard);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId()==R.id.buttom_dashboard){
-                return true;
-            }
-            else if (item.getItemId()==R.id.bottomhome) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }
-            else if(item.getItemId()==R.id.bottom_fav) {
-                //startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                Intent intent = new Intent(getApplicationContext(), FavActivity.class);
-                intent.putExtra("currentUserEmail", currentUserEmail);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }
-            else if(item.getItemId()==R.id.planbotton) {
-                startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
+        bottomNavigationView.getMenu().clear();
+        if (skip==true){
+            bottomNavigationView.inflateMenu(R.menu.guest_menu);
+            bottomNavigationView.setSelectedItemId(R.id.buttom_dashboardguest);
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+                if (item.getItemId() == R.id.buttom_dashboardguest) {
+                    return true;
+                }   else
+                if (item.getItemId() == R.id.searchguest) {
+                    // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+
+                }
+                else {
+                    return false;
+                }
+            });
+        }
+        else {
+            bottomNavigationView.inflateMenu(R.menu.bottom_nav_menu);
+            bottomNavigationView.setSelectedItemId(R.id.buttom_dashboard);
+            bottomNavigationView.setOnItemSelectedListener(item -> {
+                if (item.getItemId() == R.id.buttom_dashboard) {
+                    return true;
+                } else if (item.getItemId() == R.id.bottomhome) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.bottom_fav) {
+                    //startActivity(new Intent(getApplicationContext(), FavActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), FavActivity.class);
+                    intent.putExtra("currentUserEmail", currentUserEmail);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.planbotton) {
+                    startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        }
 
 
     }

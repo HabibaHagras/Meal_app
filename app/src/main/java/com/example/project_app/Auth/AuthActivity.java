@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
+import com.example.project_app.randomMeal.view.RandomMealActivity;
 
 public class AuthActivity extends AppCompatActivity {
     Button login ;
@@ -40,7 +41,7 @@ public class AuthActivity extends AppCompatActivity {
         Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+                Intent intent = new Intent(AuthActivity.this, RandomMealActivity.class);
                 intent.putExtra("skip", true);
                 startActivity(intent);
             }

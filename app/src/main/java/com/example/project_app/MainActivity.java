@@ -34,30 +34,7 @@ public class MainActivity extends AppCompatActivity {
         TextView userEmailTextView = findViewById(R.id.userEmailTextView);
         userEmailTextView.setText("Welcome, " + currentUserEmail);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.getMenu().clear();
-        if (skip==true){
-                    bottomNavigationView.inflateMenu(R.menu.guest_menu);
-            bottomNavigationView.setSelectedItemId(R.id.buttom_dashboardguest);
-            bottomNavigationView.setOnItemSelectedListener(item -> {
-//                if (item.getItemId() == R.id.bottomhome) {
-//                    return true;
-//                }   else
-                    if (item.getItemId() == R.id.buttom_dashboardguest) {
-                    // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
-                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
-                    return true;
 
-                }
-                else {
-                    return false;
-                }
-            });
-        }
-        else {
-            bottomNavigationView.inflateMenu(R.menu.bottom_nav_menu);
 
             bottomNavigationView.setSelectedItemId(R.id.bottomhome);
             bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -85,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             });
-        }
+
 ////
 ////        binding = ActivityMainBinding.inflate(getLayoutInflater());
 ////        setContentView(binding.getRoot());

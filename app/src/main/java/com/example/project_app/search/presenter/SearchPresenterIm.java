@@ -26,7 +26,11 @@ public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
         _Repository.getAllMealsSearch(this,mealWord);
 
     }
+    @Override
+    public void getsearchCategory(String categoryWord) {
+        _Repository.getAllMealsSearchCategory(this,categoryWord);
 
+    }
     @Override
     public void onSucessResult(List<Meal> meals) {
         _view.showdata(meals);

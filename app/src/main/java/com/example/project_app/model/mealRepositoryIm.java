@@ -66,6 +66,9 @@ public class mealRepositoryIm implements mealRepository {
     public void getAllMealsSearch(NetworkCallback networkCallback, String wordMeaL) {
         remoteDataSource.makeNetwokCallSearch(networkCallback,wordMeaL);
     }
-
+    @Override
+    public void getAllMealsSearchCategory(NetworkCallback networkCallback, String wordCategory) {
+        remoteDataSource.makeNetwokCallSearchCategory(networkCallback,wordCategory);
+    }
 
 }

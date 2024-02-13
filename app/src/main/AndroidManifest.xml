@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Project_App"
         tools:targetApi="31">
         <activity
+            android:name=".Auth.SearchByActivity"
+            android:exported="false" />
+        <activity
+            android:name=".searchCategory.view.SearchCategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".search.view.kkk"
             android:exported="false" />
         <activity

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.project_app.Auth.SearchByActivity;
 import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.searchbotton) {
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;

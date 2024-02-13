@@ -14,6 +14,7 @@ public interface mealRepository {
     public void getAllCategories(NetworkCallback networkCallback);
     public void  insertMeal(Meal meal,String DAY);
     public void getAllMealsSearch(NetworkCallback networkCallback,String wordMeaL);
+    public void getAllMealsSearchCategory(NetworkCallback networkCallback, String wordCategory) ;
 
 
 

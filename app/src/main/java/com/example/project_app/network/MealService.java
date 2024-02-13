@@ -15,5 +15,7 @@ public interface MealService {
     Call<categoryResponce> getCategory();
     @GET("search.php")
     Call<mealResponse> getSearch(@Query("s") String query);
+    @GET("filter.php")
+    Call<mealResponse> getSearchByCategory(@Query("c") String category);
 
 }

@@ -5,14 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".plan.view.Day_PlanActivity">
-    <ListView android:id="@+id/rv_Day_Plan"
+    <ListView
+        android:id="@+id/rv_Day_Plan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" android:padding="16dp"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

@@ -13,6 +13,8 @@ public interface mealRepository {
     public void getAllMeals(NetworkCallback networkCallback);
     public void getAllCategories(NetworkCallback networkCallback);
     public void  insertMeal(Meal meal,String DAY);
+    public void getAllMealsSearch(NetworkCallback networkCallback,String wordMeaL);
+
 
 
 }

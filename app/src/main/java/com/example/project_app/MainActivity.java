@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
+import com.example.project_app.search.view.SearchActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,7 +59,13 @@ public class MainActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;
-                } else {
+                } else if (item.getItemId() == R.id.searchbotton) {
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+                    return true;
+                }
+                else {
                     return false;
                 }
             });

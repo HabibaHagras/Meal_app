@@ -61,4 +61,11 @@ public class mealRepositoryIm implements mealRepository {
         localDataSource.insertMealPlan(meal,DAY);
 
     }
+
+    @Override
+    public void getAllMealsSearch(NetworkCallback networkCallback, String wordMeaL) {
+        remoteDataSource.makeNetwokCallSearch(networkCallback,wordMeaL);
+    }
+
+
 }

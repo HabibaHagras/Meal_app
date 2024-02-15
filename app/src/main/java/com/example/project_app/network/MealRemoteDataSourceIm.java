@@ -1,6 +1,7 @@
 package com.example.project_app.network;
 
 
+import com.example.project_app.model.areaResponse;
 import com.example.project_app.model.Meal;
 import com.example.project_app.model.categoryResponce;
 import com.example.project_app.model.mealResponse;
@@ -103,6 +104,40 @@ public class MealRemoteDataSourceIm implements MealRemoteDataSource {
             }
         });
 
+    }
+
+    @Override
+    public void makeNetwokCallSearchIngredient(NetworkCallback networkCallback, String ingredient) {
+        Call<mealResponse> call5 = myService.getSearchByIngredient(ingredient);
+        call5.enqueue(new Callback<mealResponse>(){
+            @Override
+            public void onResponse(Call<mealResponse> call, Response<mealResponse> response) {
+                networkCallback.onSucessResult(response.body().getMeals());
+            }
+
+            @Override
+            public void onFailure(Call<mealResponse> call, Throwable t) {
+                networkCallback.onFailuer(t.getMessage());
+
+            }
+        });
+    }
+
+    @Override
+    public void makeNetwokCallArea(NetworkCallback networkCallback) {
+        Call<areaResponse> call5 = myService.getAreas();
+        call5.enqueue(new Callback<areaResponse>(){
+            @Override
+            public void onResponse(Call<areaResponse> call, Response<areaResponse> response) {
+                networkCallback.onSucessResultArea(response.body().getAreas());
+            }
+
+            @Override
+            public void onFailure(Call<areaResponse> call, Throwable t) {
+                networkCallback.onFailuerArea(t.getMessage());
+
+            }
+        });
     }
 
 }

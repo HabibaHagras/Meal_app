@@ -12,4 +12,5 @@ public class mealResponse {
     public void setProducts(List<Meal> products) {
         this.meals = products;
     }
+
 }

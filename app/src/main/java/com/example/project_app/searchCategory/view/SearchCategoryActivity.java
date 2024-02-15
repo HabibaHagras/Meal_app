@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,7 +45,8 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
     MealDAO DAO;
     List<Meal> mealList;
     SearchCategoryPresenter searchPresenter;
-    EditText searchEditText;
+    EditText searchEditTextCategory;
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +58,14 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
         searchAdapter = new SearchCartegoryAdapter(this, new ArrayList<>(),this);
 
         recyclerView.setAdapter(searchAdapter);
-        searchEditText =findViewById(R.id.searchEditTextCategory);
+        searchEditTextCategory =findViewById(R.id.searchEditTextCategory);
 
         searchPresenter= new SearchCategoryPresenterIm(this,
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                         MealLocalDataSourceIm.getInstance(this)
                 ));
         Observable.create((ObservableOnSubscribe<String>) emitter ->
-                        searchEditText.addTextChangedListener(new TextWatcher() {
+                        searchEditTextCategory.addTextChangedListener(new TextWatcher() {
                             @Override
                             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
                             }
@@ -77,7 +79,8 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
                             public void afterTextChanged(Editable editable) {
                             }
                         }))
-                .debounce(300, TimeUnit.MILLISECONDS)
+//                .debounce(500, TimeUnit.MILLISECONDS)
+//                .distinctUntilChanged()
                 .map(String::toLowerCase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -88,10 +91,18 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
 
 
 
+
+
+
     @Override
     public void showdata(List<Meal> products) {
-        searchAdapter.SetList(products);
-        searchAdapter.notifyDataSetChanged();
+        if (products != null && products.isEmpty()) {
+            // Show a dialog indicating no meals found
+            showNoMealsDialog();
+        } else {
+            searchAdapter.SetList(products);
+            searchAdapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -109,5 +120,10 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
 
     }
 
-
+    private void showNoMealsDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("No meals found with this name").setTitle("No Results");
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
 }

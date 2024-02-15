@@ -1,4 +1,4 @@
-package com.example.project_app.search.view;
+package com.example.project_app.searchIngredient.view;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +19,10 @@ import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
-import com.example.project_app.randomMeal.presenter.AllMealPresenter;
-import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
-import com.example.project_app.randomMeal.view.RycAdapter;
-import com.example.project_app.search.presenter.SearchPresenter;
-import com.example.project_app.search.presenter.SearchPresenterIm;
+import com.example.project_app.searchCategory.presenter.SearchCategoryPresenter;
+import com.example.project_app.searchCategory.presenter.SearchCategoryPresenterIm;
+import com.example.project_app.searchIngredient.presenter.SearchIngredientPresenter;
+import com.example.project_app.searchIngredient.presenter.SearchIngredientPresenterIm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,32 +33,31 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchActivity extends AppCompatActivity implements  AllSearchView, onClickSearchListener {
+public class SearchIngredientActivity extends AppCompatActivity implements SearchIngredientView ,onClickSearchIngredient {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     MealClient mealClient;
-    SearchAdapter searchAdapter ;
+    SearchIngredientAdapter searchAdapter ;
     AppDataBase dp;
     MealDAO DAO;
     List<Meal> mealList;
-    SearchPresenter searchPresenter;
+    SearchIngredientPresenter searchPresenter;
     EditText searchEditText;
-
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        recyclerView=findViewById(R.id.rv_search);
+        setContentView(R.layout.activity_search_ingredient);
+        recyclerView = findViewById(R.id.rv_searchIngredient);  // Initialize recyclerView
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        searchAdapter = new SearchAdapter(this, new ArrayList<>(),this);
+        searchAdapter = new SearchIngredientAdapter(this, new ArrayList<>(),this);
 
         recyclerView.setAdapter(searchAdapter);
-        searchEditText =findViewById(R.id.searchEditText);
+        searchEditText =findViewById(R.id.searchEditTextIngredient);
 
-        searchPresenter= new SearchPresenterIm(this,
+        searchPresenter= new SearchIngredientPresenterIm(this,
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                         MealLocalDataSourceIm.getInstance(this)
                 ));
@@ -84,14 +82,9 @@ public class SearchActivity extends AppCompatActivity implements  AllSearchView,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(searchTerm -> {
-                    searchPresenter.getsearch(searchTerm);
+                    searchPresenter.getsearchIngredient(searchTerm);
                 });
     }
-
-
-
-
-
 
 
     @Override
@@ -103,8 +96,6 @@ public class SearchActivity extends AppCompatActivity implements  AllSearchView,
             searchAdapter.SetList(products);
             searchAdapter.notifyDataSetChanged();
         }
-//        searchAdapter.SetList(products);
-//        searchAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -113,28 +104,12 @@ public class SearchActivity extends AppCompatActivity implements  AllSearchView,
         alertDialog.setMessage(error).setTitle("An Error Equre");
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+
     }
 
     @Override
     public void deleteProduct(Meal meal) {
 
-    }
-
-    private void setupRecyclerView() {
-        recyclerView = findViewById(R.id.rv_search);  // Initialize recyclerView
-        searchAdapter = new SearchAdapter(this, new ArrayList<>(),this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
-        recyclerView.setAdapter(searchAdapter);
-    }
-
-    private List<Meal> filterNames(Meal searchTerm) {
-        List<Meal> filteredMeals = new ArrayList<>();
-        for (Meal meal : mealList) {
-            if (meal.getStrMeal().toLowerCase().contains(searchTerm.toString().toLowerCase())) {
-                filteredMeals.add(meal);
-            }
-        }
-        return filteredMeals;
     }
     private void showNoMealsDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);

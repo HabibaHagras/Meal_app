@@ -19,6 +19,7 @@ import com.example.project_app.dp.AppDataBase;
 import com.example.project_app.dp.MealDAO;
 import com.example.project_app.dp.MealLocalDataSourceIm;
 import com.example.project_app.favMeals.view.FavActivity;
+import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepositoryIm;
@@ -32,11 +33,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomMealActivity extends AppCompatActivity implements   PutInFavListener , AllMealView  ,AllCategoryView{
+public class RandomMealActivity extends AppCompatActivity implements   PutInFavListener , AllMealView  ,AllCategoryView ,AllAreaView{
     RecyclerView recyclerView;
     RecyclerView recyclerViewofCategory;
+    RecyclerView recyclerViewofCountry;
     LinearLayoutManager linearLayoutManager;
     LinearLayoutManager linearLayoutManager1;
+    LinearLayoutManager linearLayoutManager2;
     MealClient mealClient;
     RycAdapter productAdapter;
     AppDataBase dp;
@@ -44,6 +47,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     List<Meal> mealList;
     AllMealPresenter allMealPresenter;
     CategoryAdapter categoryAdapter;
+    AreaAdapter areaAdapter;
     private ActivityRandomMealBinding binding;
     String currentUserEmail;
     String email;
@@ -62,14 +66,22 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
         recyclerView = findViewById(R.id.rv_meals);
         recyclerViewofCategory=findViewById(R.id.rv_categories);
+        recyclerViewofCountry=findViewById(R.id.rv_countries);
+
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         ///////////////////
         linearLayoutManager1 = new LinearLayoutManager(this);
-        linearLayoutManager1.setOrientation(LinearLayoutManager.VERTICAL);
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         ////////////////////
+        linearLayoutManager2 = new LinearLayoutManager(this);
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        //////////////////
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerViewofCategory.setLayoutManager(linearLayoutManager1);
+        recyclerViewofCountry.setLayoutManager(linearLayoutManager2);
+        areaAdapter=new AreaAdapter(this, new ArrayList<>(),this);
+        recyclerViewofCountry.setAdapter(areaAdapter);
         mealClient=mealClient.getInstance();
         productAdapter = new RycAdapter(this, new ArrayList<>(),this);
         recyclerView.setAdapter(productAdapter);
@@ -80,9 +92,10 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         allMealPresenter= new AllMealPresenterIm(this,
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                 MealLocalDataSourceIm.getInstance(this)
-                ),this);
+                ),this,this);
         allMealPresenter.getMeal();
         allMealPresenter.getCtegory();
+        allMealPresenter.getArea();
         skip = getIntent().getBooleanExtra("skip",false);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.getMenu().clear();
@@ -185,5 +198,20 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         intent.putExtra("MEAL_OBJECT_KEY", meal);
         startActivity(intent);
       //  addProduct(meal);
+    }
+
+    @Override
+    public void OnCartclick(Meal meal) {
+        Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+        intent.putExtra("MEAL_KEY", meal);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showdataAreas(List<Area> areas) {
+        areaAdapter.SetList(areas);
+        areaAdapter.notifyDataSetChanged();
+
+
     }
 }

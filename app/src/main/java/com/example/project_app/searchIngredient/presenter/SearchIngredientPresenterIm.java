@@ -1,30 +1,34 @@
-package com.example.project_app.searchCategory.presenter;
+package com.example.project_app.searchIngredient.presenter;
 
 import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepository;
 import com.example.project_app.network.NetworkCallback;
-import com.example.project_app.randomMeal.view.AllCategoryView;
-import com.example.project_app.search.presenter.SearchPresenter;
-import com.example.project_app.search.view.AllSearchView;
 import com.example.project_app.searchCategory.view.AllSearchCategoryView;
+import com.example.project_app.searchIngredient.view.SearchIngredientView;
 
 import java.util.List;
 
-public class SearchCategoryPresenterIm implements SearchCategoryPresenter, NetworkCallback {
+public class SearchIngredientPresenterIm  implements  SearchIngredientPresenter , NetworkCallback {
     private mealRepository _Repository;
-    private AllSearchCategoryView _allCategoryView ;
+    private SearchIngredientView searchIngredientView ;
 
-
-    public SearchCategoryPresenterIm(AllSearchCategoryView _view, mealRepository _Repository) {
-        this._allCategoryView = _view;
+    public SearchIngredientPresenterIm( SearchIngredientView searchIngredientView ,mealRepository _Repository) {
         this._Repository = _Repository;
+        this.searchIngredientView = searchIngredientView;
+    }
+
+    @Override
+    public void getsearchIngredient(String ingredient) {
+        _Repository.getAllMealsSearchIngredient(this,ingredient);
+
     }
 
     @Override
     public void onSucessResult(List<Meal> meals) {
-        _allCategoryView.showdata(meals);
+        searchIngredientView.showdata(meals);
+
     }
 
     @Override
@@ -49,13 +53,6 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
 
     @Override
     public void onFailuerArea(String errorr_msg) {
-
-    }
-
-
-    @Override
-    public void getsearchCategory(String categoryWord) {
-        _Repository.getAllMealsSearchCategory(this,categoryWord);
 
     }
 }

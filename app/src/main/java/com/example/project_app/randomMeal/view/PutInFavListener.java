@@ -6,4 +6,5 @@ import com.example.project_app.model.Meal;
 public interface PutInFavListener {
     void oPutInFavClick(Meal meal);
     void OnPlanClick(Meal meal);
+    void OnCartclick(Meal meal);
 }

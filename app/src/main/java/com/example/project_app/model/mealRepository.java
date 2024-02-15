@@ -15,6 +15,8 @@ public interface mealRepository {
     public void  insertMeal(Meal meal,String DAY);
     public void getAllMealsSearch(NetworkCallback networkCallback,String wordMeaL);
     public void getAllMealsSearchCategory(NetworkCallback networkCallback, String wordCategory) ;
+    public void getAllMealsSearchIngredient(NetworkCallback networkCallback, String ingredient) ;
+    public void getAllAreas(NetworkCallback networkCallback);
 
 
 

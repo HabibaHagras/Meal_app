@@ -1,5 +1,6 @@
 package com.example.project_app.search.presenter;
 
+import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepository;
@@ -49,6 +50,16 @@ public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
 
     @Override
     public void onFailuerCategory(String error_msg) {
+
+    }
+
+    @Override
+    public void onSucessResultArea(List<Area> areas) {
+
+    }
+
+    @Override
+    public void onFailuerArea(String errorr_msg) {
 
     }
 }

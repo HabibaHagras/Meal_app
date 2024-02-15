@@ -69,11 +69,16 @@ CardView cardView;
         youtube = findViewById(R.id.webView);
         Intent intent = getIntent();
         meal = (Meal) intent.getSerializableExtra("MEAL_KEY");
-        String videoUrl = meal.getStrYoutube().replace("watch?v=", "embed/");
-        String video = "<iframe width=\"100%\" height=\"100%\" src=\"" + videoUrl + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
-        youtube.loadData(video, "text/html","utf-8");
-        youtube.getSettings().setJavaScriptEnabled(true);
-        youtube.setWebChromeClient(new WebChromeClient());
+        String youtubeUrl = meal.getStrYoutube();
+
+        if (youtubeUrl != null) {
+
+            String videoUrl = youtubeUrl.replace("watch?v=", "embed/");
+            String video = "<iframe width=\"100%\" height=\"100%\" src=\"" + videoUrl + "\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>";
+            youtube.loadData(video, "text/html", "utf-8");
+            youtube.getSettings().setJavaScriptEnabled(true);
+            youtube.setWebChromeClient(new WebChromeClient());
+        }
         Glide.with(this).load(meal.getStrMealThumb()).into(imageViewMeal);
         textViewMealName.setText(meal.getStrMeal());
         textViewCategoryArea.setText( meal.getStrCategory());

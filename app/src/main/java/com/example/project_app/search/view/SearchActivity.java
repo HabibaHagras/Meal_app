@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.example.project_app.IteamMeal.view.IteamMealActivity;
 import com.example.project_app.R;
 import com.example.project_app.dp.AppDataBase;
 import com.example.project_app.dp.MealDAO;
@@ -141,5 +143,17 @@ public class SearchActivity extends AppCompatActivity implements  AllSearchView,
         alertDialog.setMessage("No meals found with this name").setTitle("No Results");
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    @Override
+    public void OnCartclick(Meal meal) {
+        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
+        intent.putExtra("MEAL_KEY", meal);
+        startActivity(intent);
+    }
+
+    @Override
+    public void OnCartclicfk(Meal meal) {
+
     }
 }

@@ -58,6 +58,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the listener method for the card view click
+                listner.OnCartclick(product);
+            }
+        });
     }
 
     @Override

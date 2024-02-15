@@ -53,6 +53,13 @@ public class SearchCartegoryAdapter extends  RecyclerView.Adapter<SearchCartegor
         Meal product = meals.get(position);
         holder.tvTitle.setText("Title of Meal :  " +meals.get(position).getStrMeal());
         Glide.with(context).load(meals.get(position).getStrMealThumb()).into(holder.img);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the listener method for the card view click
+                listner.OnCartclick(product);
+            }
+        });
 
     }
 

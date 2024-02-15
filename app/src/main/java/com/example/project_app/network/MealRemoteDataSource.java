@@ -6,6 +6,7 @@ public interface MealRemoteDataSource {
     void makeNetwokCallSearch(NetworkCallback networkCallback,String wordMeal);
     void makeNetwokCallSearchCategory(NetworkCallback networkCallback,String wordCategory);
     void makeNetwokCallSearchIngredient(NetworkCallback networkCallback,String ingredient);
+    void makeNetwokCallSearchArea(NetworkCallback networkCallback,String area);
     void makeNetwokCallArea(NetworkCallback networkCallback);
 
 }

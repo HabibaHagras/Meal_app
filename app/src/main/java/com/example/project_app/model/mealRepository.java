@@ -17,6 +17,7 @@ public interface mealRepository {
     public void getAllMealsSearchCategory(NetworkCallback networkCallback, String wordCategory) ;
     public void getAllMealsSearchIngredient(NetworkCallback networkCallback, String ingredient) ;
     public void getAllAreas(NetworkCallback networkCallback);
+    public void getAllMealsSearchAreat(NetworkCallback networkCallback, String area) ;
 
 
 

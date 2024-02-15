@@ -124,6 +124,23 @@ public class MealRemoteDataSourceIm implements MealRemoteDataSource {
     }
 
     @Override
+    public void makeNetwokCallSearchArea(NetworkCallback networkCallback, String area) {
+        Call<mealResponse> call6 = myService.getSearchByArea(area);
+        call6.enqueue(new Callback<mealResponse>(){
+            @Override
+            public void onResponse(Call<mealResponse> call, Response<mealResponse> response) {
+                networkCallback.onSucessResult(response.body().getMeals());
+            }
+
+            @Override
+            public void onFailure(Call<mealResponse> call, Throwable t) {
+                networkCallback.onFailuer(t.getMessage());
+
+            }
+        });
+    }
+
+    @Override
     public void makeNetwokCallArea(NetworkCallback networkCallback) {
         Call<areaResponse> call5 = myService.getAreas();
         call5.enqueue(new Callback<areaResponse>(){

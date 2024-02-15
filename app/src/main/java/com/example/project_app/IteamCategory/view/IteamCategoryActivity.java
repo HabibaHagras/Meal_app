@@ -89,9 +89,9 @@ public class IteamCategoryActivity extends AppCompatActivity  implements AllSear
 
     @Override
     public void OnCartclick(Meal meal) {
-        
+
         Intent intent = new Intent(getApplicationContext(), IteamMealSelectedFromCategoryActivity.class);
-        intent.putExtra("IteamMealSelectedFromCategoryActivity", meal);
+        intent.putExtra("IteamMealSelectedFromCategoryActivity", meal.getStrMeal());
         startActivity(intent);
     }
 }

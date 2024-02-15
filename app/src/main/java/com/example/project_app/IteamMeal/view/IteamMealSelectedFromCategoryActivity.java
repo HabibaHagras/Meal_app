@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.project_app.IteamMeal.presenter.IteamMealPresenter;
+import com.example.project_app.IteamMeal.presenter.IteamMealPresenterIm;
 import com.example.project_app.R;
 import com.example.project_app.dp.MealLocalDataSourceIm;
 import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealRemoteDataSourceIm;
+import com.example.project_app.randomMeal.view.AllMealView;
 import com.example.project_app.search.presenter.SearchPresenter;
 import com.example.project_app.search.presenter.SearchPresenterIm;
 import com.example.project_app.search.view.AllSearchView;
@@ -17,8 +20,8 @@ import com.example.project_app.search.view.onClickSearchListener;
 
 import java.util.List;
 
-public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity implements AllSearchView, onClickSearchListener {
-    SearchPresenter searchPresenter;
+public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity implements AllMealView {
+    IteamMealPresenter searchPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,19 +29,22 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iteam_meal_selected_from_category);
         Intent intent = getIntent();
-     Meal   meal = (Meal)intent.getSerializableExtra("IteamMealSelectedFromCategoryActivity");
+     String   meal = intent.getStringExtra("IteamMealSelectedFromCategoryActivity");
 
-        searchPresenter= new SearchPresenterIm(this,
+        searchPresenter= new IteamMealPresenterIm(this,
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                         MealLocalDataSourceIm.getInstance(this)
                 ));
-//        searchPresenter.getsearch(meal);
+        searchPresenter.getMeal(meal);
         System.out.println(meal);
-        OnCartclicfk(meal);
     }
 
     @Override
     public void showdata(List<Meal> products) {
+        Meal meal = products.get(0);
+        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
+        intent.putExtra("MEAL_KEY",meal);
+        startActivity(intent);
 
     }
 
@@ -48,20 +54,11 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
     }
 
     @Override
-    public void deleteProduct(Meal meal) {
+    public void addProduct(Meal product) {
 
     }
 
-    @Override
-    public void OnCartclick(Meal meal) {
-        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
-        intent.putExtra("MEAL_KEY", meal);
-        startActivity(intent);
-    }
 
-    @Override
-    public void OnCartclicfk(Meal meal) {
-        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
-        intent.putExtra("MEAL_KEY", meal);
-        startActivity(intent);    }
 }
+
+

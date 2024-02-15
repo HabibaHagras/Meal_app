@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.project_app.Day.view.DayActivity;
+import com.example.project_app.IteamMeal.view.IteamMealActivity;
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 import com.example.project_app.databinding.ActivityRandomMealBinding;
@@ -202,7 +203,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void OnCartclick(Meal meal) {
-        Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
         intent.putExtra("MEAL_KEY", meal);
         startActivity(intent);
     }

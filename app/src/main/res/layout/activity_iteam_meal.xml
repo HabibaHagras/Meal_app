@@ -1,9 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".IteamMeal.view.IteamMealActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Meal Image -->
+                <ImageView
+                    android:id="@+id/imageViewMeal"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground" />
+
+                <!-- Meal Name -->
+                <TextView
+                    android:id="@+id/textViewMealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Tortang Talong"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <!-- Meal Category and Area -->
+                <TextView
+                    android:id="@+id/textViewCategoryArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Vegetarian | Filipino"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14sp" />
+
+                <!-- Ingredients -->
+                <TextView
+                    android:id="@+id/textViewIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ingredients:"
+                    android:textStyle="bold" />
+
+                <!-- Instructions -->
+                <TextView
+                    android:id="@+id/textViewInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Instructions:"
+                    android:textStyle="bold" />
+
+                <!-- Source Link -->
+                <TextView
+                    android:id="@+id/textViewSource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:autoLink="web"
+                    android:text="Source: https://www.sainsburysmagazine.co.uk/recipes/mains/tortang-talong"
+                    android:textColor="@color/black" />
+                <WebView
+                    android:id="@+id/webView"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp" />
+<!--                <VideoView&ndash;&gt;-->
+                <!--                    android:id="@+id/videoView"-->
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</ScrollView>

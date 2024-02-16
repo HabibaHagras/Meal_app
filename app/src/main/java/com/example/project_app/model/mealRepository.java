@@ -6,11 +6,14 @@ import com.example.project_app.network.NetworkCallback;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
 public interface mealRepository {
-    public LiveData<List<Meal>> getStoredProduct();
-    public void  insertMeal(Meal meal);
+    public Flowable<List<Meal>> getStoredProduct();
+    public Flowable<List<Meal>> getStoredProductforUser(String user);
+    public Completable insertMeal(Meal meal);
     public  void  deleteMeal(Meal meal);
     public Observable<List<Meal>> getAllMeals(NetworkCallback networkCallback);
     public Observable<List<Category>> getAllCategories(NetworkCallback networkCallback);

@@ -12,6 +12,7 @@ import com.example.project_app.randomMeal.view.AllMealView;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class AllMealPresenterIm implements AllMealPresenter , NetworkCallback {
     private AllMealView _view ;
@@ -36,7 +37,14 @@ public class AllMealPresenterIm implements AllMealPresenter , NetworkCallback {
 
     @Override
     public void addtoFav(Meal product) {
-        _Repository.insertMeal(product);
+        _Repository.insertMeal(product)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> _view.showErrorMsg("Add to favourite successfully"),
+                        error -> _view.showErrorMsg(error.getMessage())
+                );
+//        _Repository.insertMeal(product);
 
     }
 

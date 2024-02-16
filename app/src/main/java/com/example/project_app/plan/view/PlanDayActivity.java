@@ -21,7 +21,6 @@ import com.example.project_app.favMeals.presenter.FavPresenterIm;
 import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.favMeals.view.FavAdapter;
 import com.example.project_app.model.Meal;
-import com.example.project_app.model.Repository;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
@@ -38,7 +37,6 @@ public class PlanDayActivity extends AppCompatActivity implements AllPlanView ,O
     PlanAdapter planAdapter;
     AppDataBase dp;
     MealDAO DAO;
-    Repository repo ;
     PlanPresenter planPresenter;
     String day;
     private static final String TAG = "PlanDayActivity";
@@ -61,7 +59,6 @@ public class PlanDayActivity extends AppCompatActivity implements AllPlanView ,O
         planRecyclerView.setLayoutManager(linearLayoutManager);
         dp=AppDataBase.getInstance(this);
         DAO=dp.getmealDAO();
-        repo=Repository.getInstance(this);
         planAdapter.notifyDataSetChanged();
         planPresenter=new PlanPresenterIm(this, mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                 MealLocalDataSourceIm.getInstance(this)));

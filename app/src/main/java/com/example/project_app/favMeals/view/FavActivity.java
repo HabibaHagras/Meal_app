@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.project_app.Auth.LoginActivity;
@@ -24,7 +25,6 @@ import com.example.project_app.dp.MealLocalDataSourceIm;
 import com.example.project_app.favMeals.presenter.FavPresenter;
 import com.example.project_app.favMeals.presenter.FavPresenterIm;
 import com.example.project_app.model.Meal;
-import com.example.project_app.model.Repository;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
@@ -43,13 +43,12 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     FavAdapter favproductAdapter;
     AppDataBase dp;
     MealDAO DAO;
-    Repository repo ;
     FavPresenter favPresenter;
     private ActivityFavBinding binding;
     String currentUserEmail;
     Meal  mael;
     private FirebaseAuth auth;
-
+    private static final String TAG = "MealLocalDataSourceIm";
 
 
     @Override
@@ -74,20 +73,24 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         favRecyclerView.setLayoutManager(linearLayoutManager);
         dp=AppDataBase.getInstance(this);
         DAO=dp.getmealDAO();
-        repo=Repository.getInstance(this);
         // favproductAdapter.SetList( repo.getStoredProduct());
         favproductAdapter.notifyDataSetChanged();
         favPresenter=new FavPresenterIm(this, mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                 MealLocalDataSourceIm.getInstance(this)));
-        LiveData<List<Meal>> productList=DAO.getFavoriteMealsForUser(email);
-        productList.observe(this, new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(List<Meal> meals) {
-                favproductAdapter.SetList(meals);
-                favproductAdapter.notifyDataSetChanged();
+        Log.i(TAG, "favPresenter: "+"   "+email);
 
-            }
-        });
+        favPresenter.getMeal();
+
+
+//        LiveData<List<Meal>> productList=DAO.getFavoriteMealsForUser(email);
+//        productList.observe(this, new Observer<List<Meal>>() {
+//            @Override
+//            public void onChanged(List<Meal> meals) {
+//                favproductAdapter.SetList(meals);
+//                favproductAdapter.notifyDataSetChanged();
+//
+//            }
+//        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.bottom_fav);
@@ -134,7 +137,12 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
 
     @Override
     public void showdata(List<Meal> products) {
-    favPresenter.getMeal();
+//    favPresenter.getMeal();
+
+        favproductAdapter = new FavAdapter(this,products,this);
+        favRecyclerView.setAdapter(favproductAdapter);
+        favproductAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -146,6 +154,12 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     public void deleteProduct(Meal meal) {
         favPresenter.deleteproduct(meal);
 
+
+    }
+
+    @Override
+    public Context getContext() {
+        return this; // Assuming that FavActivity implements Context, which it does as it extends AppCompatActivity
 
     }
 

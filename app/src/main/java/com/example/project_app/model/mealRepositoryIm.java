@@ -8,6 +8,8 @@ import com.example.project_app.network.NetworkCallback;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
 public class mealRepositoryIm implements mealRepository {
@@ -31,13 +33,18 @@ public class mealRepositoryIm implements mealRepository {
     }
 
     @Override
-    public LiveData<List<Meal>> getStoredProduct() {
+    public Flowable<List<Meal>> getStoredProduct() {
         return localDataSource.getAllStoredMeals();
     }
 
     @Override
-    public void insertMeal(Meal meal) {
-        localDataSource.insertMeal(meal);
+    public Flowable<List<Meal>> getStoredProductforUser(String user) {
+        return localDataSource.getAllStoredMealsForUser(user);
+    }
+
+    @Override
+    public Completable insertMeal(Meal meal) {
+       return localDataSource.insertMeal(meal);
 
     }
 

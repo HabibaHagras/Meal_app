@@ -80,7 +80,6 @@ public class Day_PlanActivity extends AppCompatActivity {
                 editor.remove("userEmail");
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.bottom_fav) {

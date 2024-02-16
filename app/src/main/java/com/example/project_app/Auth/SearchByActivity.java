@@ -29,7 +29,7 @@ public class SearchByActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
+
             }
         });
         cat.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +37,6 @@ public class SearchByActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), SearchCategoryActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
             }
         });
         Ingredient.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +44,6 @@ public class SearchByActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), SearchIngredientActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
             }
         });
     }

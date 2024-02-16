@@ -154,17 +154,14 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                     intent.putExtra("currentUserEmail", currentUserEmail);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.planbotton) {
                     startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.searchbotton) {
                     startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
                     return true;
                 }
                 else {

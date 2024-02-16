@@ -108,18 +108,15 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
             else if(item.getItemId()==R.id.buttom_dashboard) {
                 startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
                 return true;
             }
             else if(item.getItemId()==R.id.planbotton) {
                 startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
                 return true;
             }else if (item.getItemId() == R.id.searchbotton) {
                 startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                finish();
                 return true;
             }
             else {

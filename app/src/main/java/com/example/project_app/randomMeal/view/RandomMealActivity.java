@@ -154,14 +154,18 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                     intent.putExtra("currentUserEmail", currentUserEmail);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
+
                     return true;
                 } else if (item.getItemId() == R.id.planbotton) {
                     startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.searchbotton) {
                     startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+
                     return true;
                 }
                 else {
@@ -195,6 +199,12 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     }
 
     @Override
+    public void addPlan(Meal plan_meal) {
+        allMealPresenter.addtoPlan(plan_meal);
+
+    }
+
+    @Override
     public void onLoading() {
 
     }
@@ -212,17 +222,18 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
+
     }
 
     @Override
     public void OnPlanClick(Meal meal) {
-//        meal.setUserEmail(email); // Replace currentUserEmail with the actual user's email
-
+      //  meal.setUserEmail(email);
         Toast.makeText(RandomMealActivity.this,"pls choose day",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), DayActivity.class);
         intent.putExtra("MEAL_OBJECT_KEY", meal);
         startActivity(intent);
-      //  addProduct(meal);
+       // addProduct(meal);
+       // addPlan(meal);
     }
 
     @Override

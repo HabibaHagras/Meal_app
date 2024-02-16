@@ -11,6 +11,8 @@ import com.example.project_app.randomMeal.view.AllMealView;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+
 public class IteamMealPresenterIm implements  IteamMealPresenter , NetworkCallback {
     private AllMealView _view ;
 
@@ -58,6 +60,6 @@ public class IteamMealPresenterIm implements  IteamMealPresenter , NetworkCallba
     @Override
     public void getMeal(String word_meal) {
         _view.onLoading();
-        _Repository.getAllMealsSearch(this,word_meal);
+        _Repository.getAllMealsSearch(this,word_meal).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
     }
 }

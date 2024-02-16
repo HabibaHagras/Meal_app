@@ -36,37 +36,37 @@ public class MealClient {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.themealdb.com/api/json/v1/1/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         MealService myService = retrofit.create(MealService.class);
-        Call<mealResponse> call = myService.getMeals();
-        Call<categoryResponce> call2 =myService.getCategory();
-        call.enqueue(new Callback<mealResponse>(){
+//        Call<mealResponse> call = myService.getMeals();
+//        Call<categoryResponce> call2 =myService.getCategory();
+//        call.enqueue(new Callback<mealResponse>(){
+//
+//
+//            @Override
+//            public void onResponse(Call<mealResponse> call, Response<mealResponse>response) {
+//                networkCallback.onSucessResult(response.body().getMeals());
+//                }
+//
+//            @Override
+//            public void onFailure(Call<mealResponse> call, Throwable t) {
+//                networkCallback.onFailuer(t.getMessage());
+//
+//            }
+//        });
 
-
-            @Override
-            public void onResponse(Call<mealResponse> call, Response<mealResponse>response) {
-                networkCallback.onSucessResult(response.body().getMeals());
-                }
-
-            @Override
-            public void onFailure(Call<mealResponse> call, Throwable t) {
-                networkCallback.onFailuer(t.getMessage());
-
-            }
-        });
-
-        call2.enqueue(new Callback<categoryResponce>() {
-            @Override
-            public void onResponse(Call<categoryResponce> call, Response<categoryResponce> response) {
-                networkCallback.onSucessResultCategory(response.body().getCategories());
-
-            }
-
-            @Override
-            public void onFailure(Call<categoryResponce> call, Throwable t) {
-                networkCallback.onFailuerCategory(t.toString());
-
-            }
-
-
-        });
-    }
+//        call2.enqueue(new Callback<categoryResponce>() {
+//            @Override
+//            public void onResponse(Call<categoryResponce> call, Response<categoryResponce> response) {
+//                networkCallback.onSucessResultCategory(response.body().getCategories());
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<categoryResponce> call, Throwable t) {
+//                networkCallback.onFailuerCategory(t.toString());
+//
+//            }
+//
+//
+//        });
+   }
 }

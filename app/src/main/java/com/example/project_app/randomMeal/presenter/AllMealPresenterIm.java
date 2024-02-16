@@ -11,6 +11,8 @@ import com.example.project_app.randomMeal.view.AllMealView;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+
 public class AllMealPresenterIm implements AllMealPresenter , NetworkCallback {
     private AllMealView _view ;
     private AllCategoryView _allCategoryView ;
@@ -28,7 +30,7 @@ public class AllMealPresenterIm implements AllMealPresenter , NetworkCallback {
 
     @Override
     public void getMeal() {
-        _Repository.getAllMeals(this);
+        _Repository.getAllMeals(this).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
 
     }
 
@@ -39,13 +41,21 @@ public class AllMealPresenterIm implements AllMealPresenter , NetworkCallback {
     }
 
     @Override
+    public void addtoPlan(Meal meal) {
+        _Repository.insertMeal(meal);
+
+
+    }
+
+    @Override
     public void getCtegory() {
-        _Repository.getAllCategories(this);
+        _Repository.getAllCategories(this).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdataCategory(iteam));
+
     }
 
     @Override
     public void getArea() {
-        _Repository.getAllAreas(this);
+        _Repository.getAllAreas(this).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allAreaView.showdataAreas(iteam));
 
     }
 

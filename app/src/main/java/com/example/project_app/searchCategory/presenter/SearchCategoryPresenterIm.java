@@ -12,6 +12,8 @@ import com.example.project_app.searchCategory.view.AllSearchCategoryView;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+
 public class SearchCategoryPresenterIm implements SearchCategoryPresenter, NetworkCallback {
     private mealRepository _Repository;
     private AllSearchCategoryView _allCategoryView ;
@@ -56,7 +58,7 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
     @Override
     public void getsearchCategory(String categoryWord) {
         _allCategoryView.onLoading();
-        _Repository.getAllMealsSearchCategory(this,categoryWord);
+        _Repository.getAllMealsSearchCategory(this,categoryWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
 
     }
 

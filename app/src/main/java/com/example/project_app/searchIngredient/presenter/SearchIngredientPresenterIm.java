@@ -10,6 +10,8 @@ import com.example.project_app.searchIngredient.view.SearchIngredientView;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+
 public class SearchIngredientPresenterIm  implements  SearchIngredientPresenter , NetworkCallback {
     private mealRepository _Repository;
     private SearchIngredientView searchIngredientView ;
@@ -21,7 +23,7 @@ public class SearchIngredientPresenterIm  implements  SearchIngredientPresenter 
 
     @Override
     public void getsearchIngredient(String ingredient) {
-        _Repository.getAllMealsSearchIngredient(this,ingredient);
+        _Repository.getAllMealsSearchIngredient(this,ingredient).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> searchIngredientView.showdata(iteam));
 
     }
 

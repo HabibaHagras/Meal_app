@@ -12,6 +12,8 @@ import com.example.project_app.search.view.AllSearchView;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+
 public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
 
     private AllSearchView _view ;
@@ -24,7 +26,7 @@ public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
 
     @Override
     public void getsearch(String mealWord) {
-        _Repository.getAllMealsSearch(this,mealWord);
+        _Repository.getAllMealsSearch(this,mealWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
 
     }
     @Override

@@ -9,6 +9,7 @@ public interface AllMealView {
     public void showdata(List<Meal>products);
     public void showErrorMsg(String error);
     public void addProduct(Meal product);
+    public void addPlan(Meal plan_meal);
     void onLoading();
 
 

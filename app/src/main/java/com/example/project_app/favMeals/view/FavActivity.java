@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 import com.example.project_app.databinding.ActivityFavBinding;
@@ -29,6 +30,7 @@ import com.example.project_app.network.MealRemoteDataSourceIm;
 import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,8 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     private ActivityFavBinding binding;
     String currentUserEmail;
     Meal  mael;
+    private FirebaseAuth auth;
+
 
 
     @Override
@@ -55,6 +59,7 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         binding = ActivityFavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_fav);
+        auth = FirebaseAuth.getInstance();
         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
         String email= sp.getString("userEmail","");
@@ -89,8 +94,12 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
             if (item.getItemId()==R.id.bottom_fav){
                 return true;
             }
-            else if (item.getItemId()==R.id.bottomhome) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            else if (item.getItemId() == R.id.bottomlogout) {
+                auth.signOut();
+                Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor=sp.edit();
+                editor.remove("userEmail");
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

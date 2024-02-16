@@ -3,6 +3,7 @@ package com.example.project_app.plan.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Day.presenter.DayPresenter;
 import com.example.project_app.Day.view.DayActivity;
 import com.example.project_app.MainActivity;
@@ -20,6 +22,7 @@ import com.example.project_app.favMeals.view.FavActivity;
 import com.example.project_app.model.Meal;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Day_PlanActivity extends AppCompatActivity {
     private ListView listViewNames;
@@ -30,7 +33,10 @@ public class Day_PlanActivity extends AppCompatActivity {
     Meal meallll;
     String clickedDay;
     String email;
+    private FirebaseAuth auth;
+
     private ActivityDayPlanBinding binding;
+    SharedPreferences sp;
 
 
     @Override
@@ -39,6 +45,8 @@ public class Day_PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDayPlanBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        auth = FirebaseAuth.getInstance();
+
         setContentView(R.layout.activity_day_plan);
         listViewNames = findViewById(R.id.rv_Day_Plan);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
@@ -64,8 +72,12 @@ public class Day_PlanActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.planbotton) {
                 return true;
-            } else if (item.getItemId() == R.id.bottomhome) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            } else if (item.getItemId() == R.id.bottomlogout) {
+                auth.signOut();
+                Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor=sp.edit();
+                editor.remove("userEmail");
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

@@ -37,39 +37,39 @@ public class MainActivity extends AppCompatActivity {
         userEmailTextView.setText("Welcome, " + currentUserEmail);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
 
-
-            bottomNavigationView.setSelectedItemId(R.id.bottomhome);
-            bottomNavigationView.setOnItemSelectedListener(item -> {
-                if (item.getItemId() == R.id.bottomhome) {
-                    return true;
-                } else if (item.getItemId() == R.id.buttom_dashboard) {
-                    // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
-                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
-                    intent.putExtra("currentUserEmail", currentUserEmail);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
-                    return true;
-                } else if (item.getItemId() == R.id.bottom_fav) {
-                    startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
-                    return true;
-                } else if (item.getItemId() == R.id.planbotton) {
-                    startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
-                    return true;
-                } else if (item.getItemId() == R.id.searchbotton) {
-                    startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
-                    finish();
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            });
+//
+//            bottomNavigationView.setSelectedItemId(R.id.bottomhome);
+//            bottomNavigationView.setOnItemSelectedListener(item -> {
+//                if (item.getItemId() == R.id.bottomhome) {
+//                    return true;
+//                } else if (item.getItemId() == R.id.buttom_dashboard) {
+//                    // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+//                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
+//                    intent.putExtra("currentUserEmail", currentUserEmail);
+//                    startActivity(intent);
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+//                    finish();
+//                    return true;
+//                } else if (item.getItemId() == R.id.bottom_fav) {
+//                    startActivity(new Intent(getApplicationContext(), FavActivity.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+//                    finish();
+//                    return true;
+//                } else if (item.getItemId() == R.id.planbotton) {
+//                    startActivity(new Intent(getApplicationContext(), Day_PlanActivity.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+//                    finish();
+//                    return true;
+//                } else if (item.getItemId() == R.id.searchbotton) {
+//                    startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
+//                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+//                    finish();
+//                    return true;
+//                }
+//                else {
+//                    return false;
+//                }
+//            });
 
 ////
 ////        binding = ActivityMainBinding.inflate(getLayoutInflater());

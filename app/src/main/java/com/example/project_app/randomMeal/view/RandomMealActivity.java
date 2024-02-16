@@ -9,8 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Day.view.DayActivity;
 import com.example.project_app.IteamCategory.view.IteamCategoryActivity;
 import com.example.project_app.IteamMeal.view.IteamMealActivity;
@@ -31,12 +34,15 @@ import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RandomMealActivity extends AppCompatActivity implements   PutInFavListener , AllMealView  ,AllCategoryView ,AllAreaView{
     RecyclerView recyclerView;
+    private FirebaseAuth auth;
+
     RecyclerView recyclerViewofCategory;
     RecyclerView recyclerViewofCountry;
     LinearLayoutManager linearLayoutManager;
@@ -54,6 +60,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     String currentUserEmail;
     String email;
     Boolean skip;
+    SharedPreferences sp;
 
 
     @Override
@@ -62,9 +69,11 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         binding = ActivityRandomMealBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_random_meal);
+
         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
          email= sp.getString("userEmail","");
+        auth = FirebaseAuth.getInstance();
 
         recyclerView = findViewById(R.id.rv_meals);
         recyclerViewofCategory=findViewById(R.id.rv_categories);
@@ -128,8 +137,13 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
             bottomNavigationView.setOnItemSelectedListener(item -> {
                 if (item.getItemId() == R.id.buttom_dashboard) {
                     return true;
-                } else if (item.getItemId() == R.id.bottomhome) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else if (item.getItemId() == R.id.bottomlogout) {
+                    auth.signOut();
+                    Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.clear(); // Clear all preferences
+                    editor.apply();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;
@@ -223,4 +237,5 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
 
     }
+
 }

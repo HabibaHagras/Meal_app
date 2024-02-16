@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/bottomlogout"
+        android:icon="@drawable/logout_black_24dp"
+        android:title="Logout" />
     <item
         android:id="@+id/searchbotton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:icon="@drawable/search_black_24dp"
         android:title="search" />
+    <item
+        android:id="@+id/buttom_dashboard"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_dashboard" />
     <item
         android:id="@+id/planbotton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:icon="@drawable/calendar_today_black_24dp"
         android:title="plan" />
-    <item
-        android:id="@+id/bottomhome"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
 
-    <item
-        android:id="@+id/buttom_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+
+
 
     <item
         android:id="@+id/bottom_fav"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/favorite_white_24dp"
         android:title="Favorite" />
+
 
 </menu>

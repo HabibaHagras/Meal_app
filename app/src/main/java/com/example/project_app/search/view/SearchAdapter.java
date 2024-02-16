@@ -49,15 +49,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.MyViewHolder holder, int position) {
         Meal product = meals.get(position);
-        holder.tvTitle.setText("Title of Meal :  " +meals.get(position).getStrMeal());
+        holder.tvTitle.setText("Title of Meal : "+meals.get(position).getStrMeal());
         Glide.with(context).load(meals.get(position).getStrMealThumb()).into(holder.img);
-        holder.Delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                listner.onPlanProductClick(product);
-
-            }
-        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,7 +74,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             super(itemView);
             tvTitle = itemView.findViewById(R.id.Name_of_search_meal);
             img=itemView.findViewById(R.id.imageViewsearch);
-            Delete=itemView.findViewById(R.id.delete_search_button);
 
         }
     }}

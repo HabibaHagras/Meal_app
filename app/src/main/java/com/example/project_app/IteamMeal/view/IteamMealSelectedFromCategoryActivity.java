@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.project_app.IteamMeal.presenter.IteamMealPresenter;
 import com.example.project_app.IteamMeal.presenter.IteamMealPresenterIm;
@@ -22,12 +24,17 @@ import java.util.List;
 
 public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity implements AllMealView {
     IteamMealPresenter searchPresenter;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_iteam_meal_selected_from_category);
+        progressBar = findViewById(R.id.progressBar);
+
         Intent intent = getIntent();
      String   meal = intent.getStringExtra("IteamMealSelectedFromCategoryActivity");
 
@@ -37,10 +44,12 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
                 ));
         searchPresenter.getMeal(meal);
         System.out.println(meal);
+        onLoading();
     }
 
     @Override
     public void showdata(List<Meal> products) {
+        progressBar.setVisibility(View.VISIBLE);
         Meal meal = products.get(0);
         Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
         intent.putExtra("MEAL_KEY",meal);
@@ -55,6 +64,12 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
 
     @Override
     public void addProduct(Meal product) {
+
+    }
+
+    @Override
+    public void onLoading() {
+        progressBar.setVisibility(View.VISIBLE);
 
     }
 

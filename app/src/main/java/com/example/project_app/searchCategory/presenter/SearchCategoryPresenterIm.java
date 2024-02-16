@@ -55,7 +55,9 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
 
     @Override
     public void getsearchCategory(String categoryWord) {
+        _allCategoryView.onLoading();
         _Repository.getAllMealsSearchCategory(this,categoryWord);
 
     }
+
 }

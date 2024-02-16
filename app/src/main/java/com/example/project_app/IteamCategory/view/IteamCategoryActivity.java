@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.example.project_app.IteamMeal.view.IteamMealActivity;
 import com.example.project_app.IteamMeal.view.IteamMealSelectedFromCategoryActivity;
@@ -20,6 +22,7 @@ import com.example.project_app.model.Meal;
 import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
+import com.example.project_app.randomMeal.view.AllMealView;
 import com.example.project_app.searchCategory.presenter.SearchCategoryPresenter;
 import com.example.project_app.searchCategory.presenter.SearchCategoryPresenterIm;
 import com.example.project_app.searchCategory.view.AllSearchCategoryView;
@@ -39,11 +42,14 @@ public class IteamCategoryActivity extends AppCompatActivity  implements AllSear
     List<Meal> mealList;
     String category;
     SearchCategoryPresenter searchPresenter;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iteam_category);
         Intent intent = getIntent();
+        progressBar = findViewById(R.id.progressBar);
         category = intent.getStringExtra("Category_KEY");
         recyclerView = findViewById(R.id.rv__iteam_category);  // Initialize recyclerView
         linearLayoutManager = new LinearLayoutManager(this);
@@ -63,7 +69,7 @@ public class IteamCategoryActivity extends AppCompatActivity  implements AllSear
     @Override
     public void showdata(List<Meal> products) {
         if (products != null && products.isEmpty()) {
-            // Show a dialog indicating no meals found
+            progressBar.setVisibility(View.INVISIBLE);
             showNoMealsDialog();
         } else {
             searchAdapter.SetList(products);
@@ -75,6 +81,8 @@ public class IteamCategoryActivity extends AppCompatActivity  implements AllSear
     public void showErrorMsg(String error) {
 
     }
+
+
 
     @Override
     public void deleteProduct(Meal meal) {
@@ -93,5 +101,9 @@ public class IteamCategoryActivity extends AppCompatActivity  implements AllSear
         Intent intent = new Intent(getApplicationContext(), IteamMealSelectedFromCategoryActivity.class);
         intent.putExtra("IteamMealSelectedFromCategoryActivity", meal.getStrMeal());
         startActivity(intent);
+    }
+    @Override
+    public void onLoading() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 }

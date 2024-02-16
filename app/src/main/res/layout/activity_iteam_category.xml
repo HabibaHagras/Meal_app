@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".IteamCategory.view.IteamCategoryActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="276dp"
+        android:layout_height="246dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="240dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.585"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv__iteam_category"
         android:layout_width="409dp"

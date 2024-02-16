@@ -57,6 +57,7 @@ public class IteamMealPresenterIm implements  IteamMealPresenter , NetworkCallba
 
     @Override
     public void getMeal(String word_meal) {
+        _view.onLoading();
         _Repository.getAllMealsSearch(this,word_meal);
     }
 }

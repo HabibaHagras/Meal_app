@@ -9,5 +9,6 @@ public interface AllSearchCategoryView {
     public void showdata(List<Meal> products);
     public void showErrorMsg(String error);
     public void deleteProduct(Meal meal);
+    void onLoading();
 
 }

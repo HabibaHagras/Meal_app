@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.project_app.Auth.LoginActivity;
+import com.example.project_app.Auth.SearchByActivity;
 import com.example.project_app.Day.presenter.DayPresenter;
 import com.example.project_app.Day.view.DayActivity;
 import com.example.project_app.MainActivity;
@@ -82,13 +83,18 @@ public class Day_PlanActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.bottom_fav) {
-                //startActivity(new Intent(getApplicationContext(), FavActivity.class));
-                Intent intent = new Intent(getApplicationContext(), FavActivity.class);
+                startActivity(new Intent(getApplicationContext(), FavActivity.class));
+               // Intent intent = new Intent(getApplicationContext(), FavActivity.class);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;
             } else if (item.getItemId() == R.id.buttom_dashboard) {
                 startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+                finish();
+                return true;
+            }else if (item.getItemId() == R.id.searchbotton) {
+                startActivity(new Intent(getApplicationContext(), SearchByActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

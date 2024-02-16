@@ -126,6 +126,11 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
 
     }
 
+    @Override
+    public void onLoading() {
+
+    }
+
     private void showNoMealsDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("No meals found with this name").setTitle("No Results");

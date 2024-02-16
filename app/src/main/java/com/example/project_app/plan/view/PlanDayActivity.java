@@ -93,6 +93,17 @@ public class PlanDayActivity extends AppCompatActivity implements AllPlanView ,O
     }
 
     @Override
+    public String getDayFromIntent() {
+        return getIntent().getStringExtra("dayy");
+
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
     public void onPlanProductClick(Meal meal) {
         Toast.makeText(PlanDayActivity.this,"DELETED",Toast.LENGTH_SHORT).show();
         deleteProduct(meal);

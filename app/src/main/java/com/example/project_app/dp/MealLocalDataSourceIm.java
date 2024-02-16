@@ -77,13 +77,14 @@ public  static MealLocalDataSourceIm getInstance(Context context){
     }
 
     @Override
-    public void insertMealPlan(Meal meal, String day) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dao.insert(meal);
-            }
-        }).start();
+    public Completable insertMealPlan(Meal meal, String day) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                dao.insert(meal);
+//            }
+//        }).start();
+        return dao.insert(meal);
 
     }
 }

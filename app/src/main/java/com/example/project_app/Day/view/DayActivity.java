@@ -70,4 +70,9 @@ public class DayActivity extends AppCompatActivity implements PutInPlanDaywithMe
         Log.i(TAG, "addProduct: "+"   "+day);
         dayPresenter.addtoPlan(product,day);
     }
+
+    @Override
+    public void showErrorMsg(String error) {
+
+    }
 }

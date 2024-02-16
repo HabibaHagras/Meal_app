@@ -7,6 +7,9 @@ import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.view.AllCategoryView;
 import com.example.project_app.randomMeal.view.AllMealView;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class DayPresenterIm implements DayPresenter {
     private AllDayView _view ;
     private mealRepository _Repository;
@@ -18,6 +21,13 @@ public class DayPresenterIm implements DayPresenter {
 
     @Override
     public void addtoPlan(Meal meal, String day) {
-        _Repository.insertMeal(meal,day);
+        _Repository.insertMeal(meal,day)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> _view.showErrorMsg("Add to favourite successfully"),
+                        error -> _view.showErrorMsg(error.getMessage())
+                );
+      //  _Repository.insertMeal(meal,day);
     }
 }

@@ -14,7 +14,7 @@ public interface MealLocalDataSource {
     void  deleteMeal(Meal meal);
     Flowable<List<Meal>> getAllStoredMeals();
     Flowable<List<Meal>> getAllStoredMealsForUser(String user);
-    void insertMealPlan(Meal meal,String day);
+    Completable insertMealPlan(Meal meal,String day);
 
 
 }

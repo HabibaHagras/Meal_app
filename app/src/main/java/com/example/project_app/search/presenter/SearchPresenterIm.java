@@ -26,7 +26,8 @@ public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
 
     @Override
     public void getsearch(String mealWord) {
-        _Repository.getAllMealsSearch(this,mealWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
+        _Repository.getAllMealsSearch(this,mealWord)
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
 
     }
     @Override

@@ -4,5 +4,7 @@ import com.example.project_app.model.Meal;
 
 public interface AllDayView {
     public void addProduct(Meal product,String day);
+    public void showErrorMsg(String error);
+
 
 }

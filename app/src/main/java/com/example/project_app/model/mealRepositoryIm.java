@@ -66,8 +66,8 @@ public class mealRepositoryIm implements mealRepository {
     }
 
     @Override
-    public void insertMeal(Meal meal, String DAY) {
-        localDataSource.insertMealPlan(meal,DAY);
+    public Completable insertMeal(Meal meal, String DAY) {
+        return localDataSource.insertMealPlan(meal,DAY);
 
     }
 

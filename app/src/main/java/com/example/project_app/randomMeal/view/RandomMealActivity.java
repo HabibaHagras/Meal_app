@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -195,14 +197,19 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void showdata(List<Meal> products) {
-        productAdapter.SetList(products);
-        productAdapter.notifyDataSetChanged();
+        if (isNetworkAvailable()) {
+            productAdapter.SetList(products);
+            productAdapter.notifyDataSetChanged();
+        }else {
+            Intent intent = new Intent(getApplicationContext(), FavActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
     public void showErrorMsg(String error) {
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(this);
-        alertDialog.setMessage(error).setTitle("An Error Equre");
+        alertDialog.setMessage(error).setTitle("Information For You");
         AlertDialog dialog = alertDialog.create();
         dialog.show();
 
@@ -234,9 +241,13 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void showdataCategory(List<Category> categories) {
+        if (isNetworkAvailable()) {
         categoryAdapter.SetList(categories);
         categoryAdapter.notifyDataSetChanged();
-
+        }else {
+            Intent intent = new Intent(getApplicationContext(), FavActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -283,10 +294,18 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void showdataAreas(List<Area> areas) {
+        if (isNetworkAvailable()) {
         areaAdapter.SetList(areas);
         areaAdapter.notifyDataSetChanged();
-
-
+    }else {
+        Intent intent = new Intent(getApplicationContext(), FavActivity.class);
+        startActivity(intent);
     }
 
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.project_app.Auth;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -27,11 +28,13 @@ public class SigninGoogleActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     private FirebaseAuth auth;
     private GoogleSignInClient mGoogleSignInClient;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_google);
+        sp=getSharedPreferences("useremail",MODE_PRIVATE);
 
         // Initialize Firebase Authentication
         auth = FirebaseAuth.getInstance();
@@ -86,6 +89,12 @@ public class SigninGoogleActivity extends AppCompatActivity {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
+                        SharedPreferences.Editor editor=sp.edit();
+                        String currentUserEmail = auth.getCurrentUser().getEmail();
+                        Log.i("TAG", "onSuccess: currentUserEmail");
+                        Log.i("TAG", "Storing userEmail: " + currentUserEmail);
+                        editor.putString("userEmail",currentUserEmail);
+                        editor.apply();
                         // Sign in success
                         FirebaseUser user = auth.getCurrentUser();
                         Toast.makeText(this, "Google Sign-In Successful", Toast.LENGTH_SHORT).show();

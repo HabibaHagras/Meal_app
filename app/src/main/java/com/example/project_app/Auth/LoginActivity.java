@@ -76,9 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                         isUserLoggedIn=true;
-//                                        meal=new Meal();
-//                                        // Set other meal details
-//                                        meal.setUserEmail(currentUserEmail);
+
                                         editor.putString("userEmail",currentUserEmail);
                                         editor.apply();                                        Intent intent = new Intent(LoginActivity.this, RandomMealActivity.class);
                                         intent.putExtra("currentUserEmail", currentUserEmail);

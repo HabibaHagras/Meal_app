@@ -38,6 +38,13 @@ public class AuthActivity extends AppCompatActivity {
 
             }
         });
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SigninGoogleActivity.class));
+
+            }
+        });
         Skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

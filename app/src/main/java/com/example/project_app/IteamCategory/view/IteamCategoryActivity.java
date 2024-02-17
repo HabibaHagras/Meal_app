@@ -104,6 +104,6 @@ public class IteamCategoryActivity extends AppCompatActivity  implements AllSear
     }
     @Override
     public void onLoading() {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

@@ -87,8 +87,11 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
        // databaseReference = firebaseDatabase.getReference("MealInfo");
-        databaseReference=  firebaseDatabase.getInstance().getReference("userFavorites")
-                .child(auth.getCurrentUser().getUid());
+        if (auth.getCurrentUser() != null) {
+            // Ensure that the user is not null before accessing UID
+            databaseReference = firebaseDatabase.getInstance().getReference("userFavorites")
+                    .child(auth.getCurrentUser().getUid());
+        }
         recyclerView = findViewById(R.id.rv_meals);
         recyclerViewofCategory=findViewById(R.id.rv_categories);
         recyclerViewofCountry=findViewById(R.id.rv_countries);

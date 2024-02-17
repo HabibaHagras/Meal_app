@@ -1,5 +1,6 @@
 package com.example.project_app.randomMeal.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +37,11 @@ import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +68,11 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     String email;
     Boolean skip;
     SharedPreferences sp;
+    FirebaseDatabase firebaseDatabase;
 
+    // creating a variable for our Database
+    // Reference for Firebase.
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,8 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         binding = ActivityRandomMealBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_random_meal);
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("MealInfo");
         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
          email= sp.getString("userEmail","");
@@ -195,6 +206,13 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     @Override
     public void addProduct(Meal product) {
         allMealPresenter.addtoFav(product);
+        String mealKey = databaseReference.push().getKey(); // Generate a unique key
+        if (mealKey != null) {
+            databaseReference.child(mealKey).setValue(product); // Set the meal under the unique key
+            Toast.makeText(RandomMealActivity.this, "Data added", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(RandomMealActivity.this, "Failed to generate key", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -218,8 +236,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void oPutInFavClick(Meal meal) {
-        meal.setUserEmail(email); // Replace currentUserEmail with the actual user's email
-
+        meal.setUserEmail(email);
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
 

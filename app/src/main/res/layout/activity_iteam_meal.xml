@@ -103,22 +103,23 @@
                 android:padding="16dp">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/fav_button"
+                    android:id="@+id/favMeal_button"
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="160dp"
                     android:layout_height="60dp"
+                    android:text="Add To Fav"
                     app:icon="@drawable/favorite_white_24dp"
                     app:iconGravity="start"
                     tools:text="Add TO Fav" />
 
                 <!-- Calendar Button -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/olan_button"
+                    android:id="@+id/olanMeal_button"
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="166dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-
+                    android:text="Add To Plan"
                     android:background="#BC5555"
                     app:icon="@drawable/calendar_today_black_24dp"
                     app:iconGravity="start"

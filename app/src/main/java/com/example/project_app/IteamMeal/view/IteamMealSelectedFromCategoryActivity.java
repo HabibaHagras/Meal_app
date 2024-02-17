@@ -22,7 +22,7 @@ import com.example.project_app.search.view.onClickSearchListener;
 
 import java.util.List;
 
-public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity implements AllMealView {
+public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity implements IteamMealView {
     IteamMealPresenter searchPresenter;
     private ProgressBar progressBar;
 
@@ -44,7 +44,7 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
                 ));
         searchPresenter.getMeal(meal);
         System.out.println(meal);
-        onLoading();
+   //     onLoading();
     }
 
     @Override
@@ -67,16 +67,16 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
 
     }
 
-    @Override
-    public void addPlan(Meal plan_meal) {
-
-    }
-
-    @Override
-    public void onLoading() {
-        progressBar.setVisibility(View.VISIBLE);
-
-    }
+//    @Override
+//    public void addPlan(Meal plan_meal) {
+//
+//    }
+//
+//    @Override
+//    public void onLoading() {
+//        progressBar.setVisibility(View.VISIBLE);
+//
+//    }
 
 
 }

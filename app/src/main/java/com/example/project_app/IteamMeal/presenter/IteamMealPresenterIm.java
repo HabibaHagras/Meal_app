@@ -1,5 +1,6 @@
 package com.example.project_app.IteamMeal.presenter;
 
+import com.example.project_app.IteamMeal.view.IteamMealView;
 import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
@@ -12,13 +13,14 @@ import com.example.project_app.randomMeal.view.AllMealView;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class IteamMealPresenterIm implements  IteamMealPresenter , NetworkCallback {
-    private AllMealView _view ;
+    private IteamMealView _view ;
 
     private mealRepository _Repository;
 
-    public IteamMealPresenterIm(AllMealView _view, mealRepository _Repository) {
+    public IteamMealPresenterIm(IteamMealView _view, mealRepository _Repository) {
 
         this._view = _view;
         this._Repository = _Repository;
@@ -59,7 +61,25 @@ public class IteamMealPresenterIm implements  IteamMealPresenter , NetworkCallba
 
     @Override
     public void getMeal(String word_meal) {
-        _view.onLoading();
         _Repository.getAllMealsSearch(this,word_meal).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
+    }
+    @Override
+    public void addtoFav(Meal product) {
+        _Repository.insertMeal(product)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> _view.showErrorMsg("Add to favourite successfully"),
+                        error -> _view.showErrorMsg(error.getMessage())
+                );
+//        _Repository.insertMeal(product);
+
+    }
+
+    @Override
+    public void addtoPlan(Meal meal) {
+        _Repository.insertMeal(meal);
+
+
     }
 }

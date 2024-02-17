@@ -51,11 +51,10 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     private static final String TAG = "MealLocalDataSourceIm";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         binding = ActivityFavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_fav);

@@ -2,9 +2,12 @@ package com.example.project_app.IteamMeal.view;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -26,9 +29,10 @@ public class IteamMealAdapter  extends RecyclerView.Adapter<IteamMealAdapter.MyV
 
     Context context;
     List<Meal> products;
-    private PutInFavListener listner;
+    private onPutFavListener listner;
+    private static final String TAG = "IteamMealAdapter";
 
-    public IteamMealAdapter(Context context, List<Meal> products, PutInFavListener listner) {
+    public IteamMealAdapter(Context context, List<Meal> products, onPutFavListener listner) {
         this.context = context;
         this.products = products;
         this.listner = listner;
@@ -49,8 +53,6 @@ public class IteamMealAdapter  extends RecyclerView.Adapter<IteamMealAdapter.MyV
     @Override
     public void onBindViewHolder(@NonNull IteamMealAdapter.MyViewHolder holder, int position) {
         Meal meal = products.get(position);
-
-        // Set data to the views in your ViewHolder
         Glide.with(context).load(meal.getStrMealThumb()).into(holder.imageViewMeal);
         holder.textViewMealName.setText(meal.getStrMeal());
         holder.textViewCategoryArea.setText(meal.getStrCategory());  // Set your actual data
@@ -61,18 +63,29 @@ public class IteamMealAdapter  extends RecyclerView.Adapter<IteamMealAdapter.MyV
                 ingredientsBuilder.append(ingredient).append(", ");
             }
         }
-
-        // Remove the trailing comma and space if there are ingredients
         if (ingredientsBuilder.length() > "Ingredients: ".length()) {
             ingredientsBuilder.setLength(ingredientsBuilder.length() - 2);
         } else {
-            // No ingredients, hide the TextView
             holder.textViewIngredients.setVisibility(View.GONE);
         }
-
         holder.textViewIngredients.setText(ingredientsBuilder.toString());      holder.textViewInstructions.setText("Instructions: " + meal.getStrInstructions());  // Set your actual data
         holder.textViewSource.setText("Source: " + meal.getStrSource());
         holder.videoView.setVideoURI(Uri.parse(meal.getStrYoutube()));
+        holder.Favv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "onClick: "+"Meallllllllllllllllll");
+                listner.oPutInFavClick(meal);
+
+            }
+        });
+        holder.Plann.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listner.OnPlanClick(meal);
+
+            }
+        });
 
     }
 
@@ -89,6 +102,8 @@ public class IteamMealAdapter  extends RecyclerView.Adapter<IteamMealAdapter.MyV
         TextView textViewInstructions;
         TextView textViewSource;
         VideoView videoView;
+        Button Favv;
+        Button Plann;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,7 +114,10 @@ public class IteamMealAdapter  extends RecyclerView.Adapter<IteamMealAdapter.MyV
             textViewIngredients = itemView.findViewById(R.id.textViewIngredients);
             textViewInstructions = itemView.findViewById(R.id.textViewInstructions);
             textViewSource = itemView.findViewById(R.id.textViewSource);
-            videoView = itemView.findViewById(R.id.videoView);        }
+            videoView = itemView.findViewById(R.id.videoView);
+            Favv=itemView.findViewById(R.id.favMeal_button);
+            Plann=itemView.findViewById(R.id.olanMeal_button);
+        }
     }
 
 

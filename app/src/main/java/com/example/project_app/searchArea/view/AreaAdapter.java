@@ -61,8 +61,7 @@ public class AreaAdapter extends  RecyclerView.Adapter<AreaAdapter.MyViewHolder>
 
     @Override
     public int getItemCount() {
-        return 0;
-    }
+        return meals != null ? meals.size() : 0;    }
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;

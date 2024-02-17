@@ -44,6 +44,13 @@ public class AreaAdapter extends  RecyclerView.Adapter<AreaAdapter.MyViewHolder>
     public void onBindViewHolder(@NonNull AreaAdapter.MyViewHolder holder, int position) {
         Area area = areas.get(position);
         holder.tvCountry.setText("category of Meal :  " +areas.get(position).getStrArea());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the listener method for the card view click
+                listner.OnCartAreaclick(area);
+            }
+        });
     }
 
     @Override

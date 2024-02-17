@@ -39,6 +39,16 @@ public class Meal implements Serializable {
     private String userEmail;
     @ColumnInfo(name = "day")
     private String day;
+    @ColumnInfo(name = "fav")
+    Boolean fav;
+
+    public Boolean getFav() {
+        return fav;
+    }
+
+    public void setFav(Boolean fav) {
+        this.fav = fav;
+    }
 
     public String getDay() {
         return day;

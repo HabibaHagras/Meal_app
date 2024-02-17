@@ -25,7 +25,7 @@ public class DayPresenterIm implements DayPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        () -> _view.showErrorMsg("Add to favourite successfully"),
+                        () -> _view.showErrorMsg("Add to Plan successfully"),
                         error -> _view.showErrorMsg(error.getMessage())
                 );
       //  _Repository.insertMeal(meal,day);

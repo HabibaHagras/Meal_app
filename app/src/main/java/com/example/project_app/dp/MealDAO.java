@@ -21,6 +21,7 @@ public interface MealDAO {
     Flowable<List<Meal>> getAllMeals();
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insert(Meal meal);
+
     @Delete
     void delete (Meal meal);
     @Query("SELECT * FROM meal_table WHERE userEmail = :userEmail")

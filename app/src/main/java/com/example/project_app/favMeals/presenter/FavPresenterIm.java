@@ -72,7 +72,7 @@ public class FavPresenterIm implements FavPresenter {
 //        return userMeals;
         List<Meal> userMeals = new ArrayList<>();
         for (Meal meal : allMeals) {
-            if (meal != null && meal.getUserEmail() != null && meal.getUserEmail().equals(userEmail)) {
+            if (meal != null && meal.getUserEmail() != null && meal.getUserEmail().equals(userEmail)&&meal.getFav() != null && meal.getFav()) {
                 userMeals.add(meal);
             }
         }

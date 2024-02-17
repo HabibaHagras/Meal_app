@@ -237,6 +237,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     @Override
     public void oPutInFavClick(Meal meal) {
         meal.setUserEmail(email);
+        meal.setFav(true);
         Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
 

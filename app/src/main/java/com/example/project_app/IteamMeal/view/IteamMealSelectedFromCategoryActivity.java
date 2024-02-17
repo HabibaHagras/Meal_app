@@ -67,18 +67,6 @@ public class IteamMealSelectedFromCategoryActivity extends AppCompatActivity imp
 
     }
 
-//    @Override
-//    public void addPlan(Meal plan_meal) {
-//
-//    }
-//
-//    @Override
-//    public void onLoading() {
-//        progressBar.setVisibility(View.VISIBLE);
-//
-//    }
-
-
 }
 
 

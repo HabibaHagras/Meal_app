@@ -14,8 +14,11 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.project_app.Auth.AuthActivity;
 import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Auth.SearchByActivity;
 import com.example.project_app.Day.view.DayActivity;
@@ -76,6 +79,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     // creating a variable for our Database
     // Reference for Firebase.
     DatabaseReference databaseReference;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +92,8 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
          email= sp.getString("userEmail","");
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-       // databaseReference = firebaseDatabase.getReference("MealInfo");
+        progressBar = findViewById(R.id.progressBar);
         if (auth.getCurrentUser() != null) {
-            // Ensure that the user is not null before accessing UID
             databaseReference = firebaseDatabase.getInstance().getReference("userFavorites")
                     .child(auth.getCurrentUser().getUid());
         }
@@ -162,7 +165,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                     SharedPreferences.Editor editor = sp.edit();
                     editor.clear(); // Clear all preferences
                     editor.apply();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    startActivity(new Intent(getApplicationContext(), AuthActivity.class));
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();
                     return true;
@@ -198,6 +201,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     @Override
     public void showdata(List<Meal> products) {
         if (isNetworkAvailable()) {
+            progressBar.setVisibility(View.VISIBLE);
             productAdapter.SetList(products);
             productAdapter.notifyDataSetChanged();
         }else {

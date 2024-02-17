@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.project_app.Auth.AuthActivity;
 import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Auth.SearchByActivity;
 import com.example.project_app.Day.presenter.DayPresenter;
@@ -78,7 +79,7 @@ public class Day_PlanActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor=sp.edit();
                 editor.remove("userEmail");
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), AuthActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

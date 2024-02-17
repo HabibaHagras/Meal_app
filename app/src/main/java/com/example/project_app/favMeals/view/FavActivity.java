@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.project_app.Auth.AuthActivity;
 import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Auth.SearchByActivity;
 import com.example.project_app.IteamMeal.view.IteamMealActivity;
@@ -122,7 +123,7 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
                 Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor=sp.edit();
                 editor.remove("userEmail");
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), AuthActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                 finish();
                 return true;

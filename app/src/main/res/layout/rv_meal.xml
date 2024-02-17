@@ -59,11 +59,11 @@
 
             android:layout_alignParentBottom="true"
             android:layout_marginTop="9dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginEnd="-12dp"
             android:layout_marginBottom="8dp"
             android:layout_toStartOf="@+id/fav_button"
             android:background="#02FFFFFF"
             android:contentDescription="plan"
-            app:srcCompat="@drawable/favorite_white_24dp" />
+            app:srcCompat="@drawable/calendar_today_black_24dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

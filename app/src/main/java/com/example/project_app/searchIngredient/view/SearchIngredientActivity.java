@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import com.example.project_app.IteamMeal.view.IteamMealSelectedFromCategoryActivity;
 import com.example.project_app.R;
 import com.example.project_app.dp.AppDataBase;
 import com.example.project_app.dp.MealDAO;
@@ -61,29 +63,31 @@ public class SearchIngredientActivity extends AppCompatActivity implements Searc
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                         MealLocalDataSourceIm.getInstance(this)
                 ));
-        Observable.create((ObservableOnSubscribe<String>) emitter ->
-                        searchEditText.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
-                            }
+        setupTextWatcher();
 
-                            @Override
-                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                                emitter.onNext(charSequence.toString());
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable editable) {
-                            }
-                        }))
-//                .debounce(500, TimeUnit.MILLISECONDS)
-//                .distinctUntilChanged()
-                .map(String::toLowerCase)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(searchTerm -> {
-                    searchPresenter.getsearchIngredient(searchTerm);
-                });
+//        Observable.create((ObservableOnSubscribe<String>) emitter ->
+//                        searchEditText.addTextChangedListener(new TextWatcher() {
+//                            @Override
+//                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+//                            }
+//
+//                            @Override
+//                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+//                                emitter.onNext(charSequence.toString());
+//                            }
+//
+//                            @Override
+//                            public void afterTextChanged(Editable editable) {
+//                            }
+//                        }))
+////                .debounce(500, TimeUnit.MILLISECONDS)
+////                .distinctUntilChanged()
+//                .map(String::toLowerCase)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(searchTerm -> {
+//                    searchPresenter.getsearchIngredient(searchTerm);
+//                });
     }
 
 
@@ -97,7 +101,24 @@ public class SearchIngredientActivity extends AppCompatActivity implements Searc
             searchAdapter.notifyDataSetChanged();
         }
     }
+    private void setupTextWatcher() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                String searchTerm = charSequence.toString().toLowerCase();
+                // You can add additional checks or validation if needed
+                searchPresenter.getsearchIngredient(searchTerm);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
     @Override
     public void showErrorMsg(String error) {
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(this);
@@ -116,5 +137,12 @@ public class SearchIngredientActivity extends AppCompatActivity implements Searc
         alertDialog.setMessage("No meals found with this name").setTitle("No Results");
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    @Override
+    public void OnCartclick(Meal meal) {
+        Intent intent = new Intent(getApplicationContext(), IteamMealSelectedFromCategoryActivity.class);
+        intent.putExtra("IteamMealSelectedFromCategoryActivity", meal.getStrMeal());
+        startActivity(intent);
     }
 }

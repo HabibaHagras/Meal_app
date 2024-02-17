@@ -65,29 +65,31 @@ public class SearchActivity extends AppCompatActivity implements  AllSearchView,
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                         MealLocalDataSourceIm.getInstance(this)
                 ));
-        Observable.create((ObservableOnSubscribe<String>) emitter ->
-                        searchEditText.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
-                            }
+        setupTextWatcher();
 
-                            @Override
-                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                                emitter.onNext(charSequence.toString());
-                            }
-
-                            @Override
-                            public void afterTextChanged(Editable editable) {
-                            }
-                        }))
-//                .debounce(500, TimeUnit.MILLISECONDS)
-//                .distinctUntilChanged()
-                .map(String::toLowerCase)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(searchTerm -> {
-                    searchPresenter.getsearch(searchTerm);
-                });
+//        Observable.create((ObservableOnSubscribe<String>) emitter ->
+//                        searchEditText.addTextChangedListener(new TextWatcher() {
+//                            @Override
+//                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+//                            }
+//
+//                            @Override
+//                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+//                                emitter.onNext(charSequence.toString());
+//                            }
+//
+//                            @Override
+//                            public void afterTextChanged(Editable editable) {
+//                            }
+//                        }))
+////                .debounce(500, TimeUnit.MILLISECONDS)
+////                .distinctUntilChanged()
+//                .map(String::toLowerCase)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(searchTerm -> {
+//                    searchPresenter.getsearch(searchTerm);
+//                });
     }
 
 
@@ -107,6 +109,24 @@ public class SearchActivity extends AppCompatActivity implements  AllSearchView,
         }
 //        searchAdapter.SetList(products);
 //        searchAdapter.notifyDataSetChanged();
+    }
+    private void setupTextWatcher() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                String searchTerm = charSequence.toString().toLowerCase();
+                // You can add additional checks or validation if needed
+                searchPresenter.getsearch(searchTerm);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
     @Override

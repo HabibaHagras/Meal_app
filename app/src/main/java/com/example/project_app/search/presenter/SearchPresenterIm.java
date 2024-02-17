@@ -13,11 +13,15 @@ import com.example.project_app.search.view.AllSearchView;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
 
     private AllSearchView _view ;
     private mealRepository _Repository;
+    private Disposable textChangeDisposable;
 
     public SearchPresenterIm(AllSearchView _view, mealRepository _Repository) {
         this._view = _view;
@@ -26,8 +30,18 @@ public class SearchPresenterIm implements SearchPresenter , NetworkCallback {
 
     @Override
     public void getsearch(String mealWord) {
-        _Repository.getAllMealsSearch(this,mealWord)
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
+        textChangeDisposable = Observable.just(mealWord)
+                .map(String::toLowerCase)
+                .defaultIfEmpty("")
+                .observeOn(Schedulers.io())
+                .switchMap(lowercasedTerm -> _Repository.getAllMealsSearch(this, lowercasedTerm))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meals -> _view.showdata(meals),
+                        error_msg -> _view.showErrorMsg("Sorry This Meal isn't in Our Meals")
+                );
+//        _Repository.getAllMealsSearch(this,mealWord)
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _view.showdata(iteam));
 
     }
     @Override

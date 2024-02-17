@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface SearchCategoryPresenter {
     public void getsearchCategory(String categoryWord) ;
+//    public void getCtegory();
+    public void getMeal();
 
 }

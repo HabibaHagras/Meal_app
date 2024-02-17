@@ -11,10 +11,14 @@ import com.example.project_app.searchIngredient.view.SearchIngredientView;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchIngredientPresenterIm  implements  SearchIngredientPresenter , NetworkCallback {
     private mealRepository _Repository;
     private SearchIngredientView searchIngredientView ;
+    private Disposable textChangeDisposable;
 
     public SearchIngredientPresenterIm( SearchIngredientView searchIngredientView ,mealRepository _Repository) {
         this._Repository = _Repository;
@@ -23,7 +27,21 @@ public class SearchIngredientPresenterIm  implements  SearchIngredientPresenter 
 
     @Override
     public void getsearchIngredient(String ingredient) {
-        _Repository.getAllMealsSearchIngredient(this,ingredient).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> searchIngredientView.showdata(iteam));
+        textChangeDisposable = Observable.just(ingredient)
+                .map(String::toLowerCase)
+                .defaultIfEmpty("")
+                .observeOn(Schedulers.io())
+                .switchMap(lowercasedTerm -> _Repository.getAllMealsSearchIngredient(this,ingredient))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meals -> searchIngredientView.showdata(meals),
+                        error_msg -> searchIngredientView.showErrorMsg("Sorry This Ingredient isn't in Our Meals")
+                );
+
+//        _Repository
+//                .getAllMealsSearchIngredient(this,ingredient)
+//                .observeOn(AndroidSchedulers.mainThread()).
+//                subscribe(iteam -> searchIngredientView.showdata(iteam));
 
     }
 

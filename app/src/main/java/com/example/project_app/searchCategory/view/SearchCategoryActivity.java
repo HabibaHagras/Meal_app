@@ -70,29 +70,35 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                         MealLocalDataSourceIm.getInstance(this)
                 ));
-        Observable.create((ObservableOnSubscribe<String>) emitter ->
-                        searchEditTextCategory.addTextChangedListener(new TextWatcher() {
-                            @Override
-                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
-                            }
+        setupTextWatcher();
+      //  searchPresenter.getMeal();
+//        searchPresenter.getCtegory();
 
-                            @Override
-                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                                emitter.onNext(charSequence.toString());
-                            }
 
-                            @Override
-                            public void afterTextChanged(Editable editable) {
-                            }
-                        }))
-//                .debounce(500, TimeUnit.MILLISECONDS)
-//                .distinctUntilChanged()
-                .map(String::toLowerCase)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(searchTerm -> {
-                    searchPresenter.getsearchCategory(searchTerm);
-                });
+
+//        Observable.create((ObservableOnSubscribe<String>) emitter ->
+//                        searchEditTextCategory.addTextChangedListener(new TextWatcher() {
+//                            @Override
+//                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+//                            }
+//
+//                            @Override
+//                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+//                                emitter.onNext(charSequence.toString());
+//                            }
+//
+//                            @Override
+//                            public void afterTextChanged(Editable editable) {
+//                            }
+//                        }))
+////                .debounce(500, TimeUnit.MILLISECONDS)
+////                .distinctUntilChanged()
+//                .map(String::toLowerCase)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(searchTerm -> {
+//                    searchPresenter.getsearchCategory(searchTerm);
+//                });
     }
 
 
@@ -111,7 +117,24 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
         }
 
     }
+    private void setupTextWatcher() {
+        searchEditTextCategory.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                String searchTerm = charSequence.toString().toLowerCase();
+                // You can add additional checks or validation if needed
+                searchPresenter.getsearchCategory(searchTerm);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+    }
     @Override
     public void showErrorMsg(String error) {
         AlertDialog.Builder alertDialog =new AlertDialog.Builder(this);
@@ -141,7 +164,7 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
     @Override
     public void OnCartclick(Meal meal) {
         Intent intent = new Intent(getApplicationContext(), IteamMealSelectedFromCategoryActivity.class);
-        intent.putExtra("IteamMealSelectedFromCategoryActivity", meal);
+        intent.putExtra("IteamMealSelectedFromCategoryActivity", meal.getStrMeal());
         startActivity(intent);
     }
 }

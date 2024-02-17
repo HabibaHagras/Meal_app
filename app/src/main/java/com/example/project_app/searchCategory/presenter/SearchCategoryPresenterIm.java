@@ -11,12 +11,17 @@ import com.example.project_app.search.view.AllSearchView;
 import com.example.project_app.searchCategory.view.AllSearchCategoryView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchCategoryPresenterIm implements SearchCategoryPresenter, NetworkCallback {
     private mealRepository _Repository;
     private AllSearchCategoryView _allCategoryView ;
+    private Disposable textChangeDisposable;
 
 
     public SearchCategoryPresenterIm(AllSearchCategoryView _view, mealRepository _Repository) {
@@ -31,6 +36,8 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
 
     @Override
     public void onFailuer(String error_msg) {
+        _allCategoryView.showErrorMsg(error_msg);
+
 
     }
 
@@ -58,8 +65,30 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
     @Override
     public void getsearchCategory(String categoryWord) {
         _allCategoryView.onLoading();
-        _Repository.getAllMealsSearchCategory(this,categoryWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
+        textChangeDisposable = Observable.just(categoryWord)
+                .flatMap(word -> Observable.fromArray(word)) // Split the word into characters
+                .map(String::toLowerCase)
+                .debounce(500, TimeUnit.MILLISECONDS)  // Introduce a delay of 500 milliseconds
+                .defaultIfEmpty("")
+                .observeOn(Schedulers.io())
+                .switchMap(lowercasedTerm -> _Repository.getAllMealsSearchCategory(this, categoryWord))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        meals -> _allCategoryView.showdata(meals),
+                        error_msg -> _allCategoryView.showErrorMsg("Sorry This Category isn't in Our Meals")
+                );
+       // _Repository.getAllMealsSearchCategory(this,categoryWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
 
     }
+    @Override
+    public void getMeal() {
+        _Repository.getAllMeals(this).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
+
+    }
+//    @Override
+//    public void getCtegory() {
+//        _Repository.getAllCategories(this).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
+//
+//    }
 
 }

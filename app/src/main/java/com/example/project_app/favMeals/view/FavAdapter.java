@@ -62,6 +62,13 @@ public class  FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder>  
 
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the listener method for the card view click
+                listner.OnCartclick(product);
+            }
+        });
 
 
     }
@@ -74,11 +81,7 @@ public class  FavAdapter extends RecyclerView.Adapter<FavAdapter.MyViewHolder>  
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
-        TextView tvPrice;
-        TextView tvBrand;
-        TextView tvDesc;
         ImageView img;
-        TextView ratingBar;
         ImageButton Delete;
 
         public MyViewHolder(@NonNull View itemView) {

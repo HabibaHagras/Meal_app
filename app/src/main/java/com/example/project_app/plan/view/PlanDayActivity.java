@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.project_app.IteamMeal.view.IteamMealActivity;
 import com.example.project_app.R;
 import com.example.project_app.dp.AppDataBase;
 import com.example.project_app.dp.MealDAO;
@@ -113,5 +115,12 @@ public class PlanDayActivity extends AppCompatActivity implements  OnClickPlanLi
         Toast.makeText(PlanDayActivity.this,"DELETED",Toast.LENGTH_SHORT).show();
         deleteProduct(meal);
 
+    }
+
+    @Override
+    public void OnCartclick(Meal meal) {
+        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
+        intent.putExtra("MEAL_KEY", meal);
+        startActivity(intent);
     }
 }

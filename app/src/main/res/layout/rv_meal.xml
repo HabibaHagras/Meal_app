@@ -38,32 +38,35 @@
             android:layout_toEndOf="@+id/imageView"
             android:text="Name"
             android:textColor="@android:color/black" />
-        <ImageButton
-            android:id="@+id/fav_button"
-            android:layout_width="99dp"
-            android:layout_height="49dp"
+
+        <LinearLayout
+            android:id="@+id/buttonLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/Name_of_meal"
             android:layout_alignEnd="@+id/Name_of_meal"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="-44dp"
-            android:layout_marginBottom="8dp"
-            android:background="#02FFFFFF"
-            android:contentDescription="fav"
-            app:srcCompat="@drawable/favorite_white_24dp" />
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="-4dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/olan_button"
-            android:layout_width="99dp"
-            android:layout_height="49dp"
+            <ImageButton
+                android:id="@+id/fav_button"
+                android:layout_width="99dp"
+                android:layout_height="49dp"
+                android:background="#02FFFFFF"
+                android:contentDescription="fav"
+                app:srcCompat="@drawable/favorite_white_24dp" />
 
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="-12dp"
-            android:layout_marginBottom="8dp"
-            android:layout_toStartOf="@+id/fav_button"
-            android:background="#02FFFFFF"
-            android:contentDescription="plan"
-            app:srcCompat="@drawable/calendar_today_black_24dp" />
+            <ImageButton
+                android:id="@+id/olan_button"
+                android:layout_width="99dp"
+                android:layout_height="49dp"
+                android:layout_marginStart="8dp"
+                android:background="#02FFFFFF"
+                android:contentDescription="plan"
+                app:srcCompat="@drawable/calendar_today_black_24dp" />
+        </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

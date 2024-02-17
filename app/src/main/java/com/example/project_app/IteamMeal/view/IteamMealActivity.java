@@ -73,6 +73,7 @@ public class IteamMealActivity extends AppCompatActivity   implements   IteamMea
     String email;
     Button Favv;
     Button Plann;
+    Button Plann_and_Fav;
     private static final String TAG = "IteamMealActivity";
     String videoURL = "https://video.blender.org/download/videos/3d95fb3d-c866-42c8-9db1-fe82f48ccb95-804.mp4";
     @Override
@@ -88,6 +89,7 @@ public class IteamMealActivity extends AppCompatActivity   implements   IteamMea
         youtube = findViewById(R.id.webView);
         Favv=findViewById(R.id.favMeal_button);
         Plann=findViewById(R.id.olanMeal_button);
+        Plann_and_Fav=findViewById(R.id.both_button);
         Intent intent = getIntent();
         meal = (Meal) intent.getSerializableExtra("MEAL_KEY");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
@@ -141,7 +143,13 @@ public class IteamMealActivity extends AppCompatActivity   implements   IteamMea
 
             }
         });
+        Plann_and_Fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OnPlanClick(meal);
 
+            }
+        });
     }
 
     private String getIngredient(Meal meal, int index) {
@@ -190,14 +198,27 @@ public class IteamMealActivity extends AppCompatActivity   implements   IteamMea
 
     @Override
     public void oPutInFavClick(Meal meal) {
+        Log.i(TAG, "oPutInFavClick: "+email);
         meal.setUserEmail(email);
         meal.setFav(true);
-        Toast.makeText(IteamMealActivity.this,"added",Toast.LENGTH_SHORT).show();
+        Toast.makeText(IteamMealActivity.this,"Added TO FAV",Toast.LENGTH_SHORT).show();
         addProduct(meal);
     }
 
     @Override
     public void OnPlanClick(Meal meal) {
+        Toast.makeText(IteamMealActivity.this,"Please Choose Day",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+        intent.putExtra("MEAL_OBJECT_KEY", meal);
+        startActivity(intent);
+    }
+
+    @Override
+    public void OnPlanFavClick(Meal meal) {
+        meal.setUserEmail(email);
+        meal.setFav(true);
+        addProduct(meal);
+        Toast.makeText(IteamMealActivity.this,"Added TO FAV",Toast.LENGTH_SHORT).show();
         Toast.makeText(IteamMealActivity.this,"pls choose day",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), DayActivity.class);
         intent.putExtra("MEAL_OBJECT_KEY", meal);

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Auth.SearchByActivity;
+import com.example.project_app.IteamMeal.view.IteamMealActivity;
 import com.example.project_app.MainActivity;
 import com.example.project_app.R;
 import com.example.project_app.databinding.ActivityFavBinding;
@@ -203,6 +204,13 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     public void onFavProductClick(Meal meal) {
         Toast.makeText(FavActivity.this,"DELETED",Toast.LENGTH_SHORT).show();
         deleteProduct(meal);
+    }
+
+    @Override
+    public void OnCartclick(Meal meal) {
+        Intent intent = new Intent(getApplicationContext(), IteamMealActivity.class);
+        intent.putExtra("MEAL_KEY", meal);
+        startActivity(intent);
     }
 
 }

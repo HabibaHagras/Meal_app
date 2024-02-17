@@ -191,6 +191,7 @@ public class IteamMealActivity extends AppCompatActivity   implements   IteamMea
     @Override
     public void oPutInFavClick(Meal meal) {
         meal.setUserEmail(email);
+        meal.setFav(true);
         Toast.makeText(IteamMealActivity.this,"added",Toast.LENGTH_SHORT).show();
         addProduct(meal);
     }

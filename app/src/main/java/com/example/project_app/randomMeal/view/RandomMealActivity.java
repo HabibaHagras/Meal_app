@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.project_app.Auth.LoginActivity;
 import com.example.project_app.Auth.SearchByActivity;
 import com.example.project_app.Day.view.DayActivity;
+import com.example.project_app.IteamArea.IteamAreaActivity;
 import com.example.project_app.IteamCategory.view.IteamCategoryActivity;
 import com.example.project_app.IteamMeal.view.IteamMealActivity;
 import com.example.project_app.MainActivity;
@@ -80,13 +81,14 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         binding = ActivityRandomMealBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_random_meal);
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("MealInfo");
         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
          email= sp.getString("userEmail","");
         auth = FirebaseAuth.getInstance();
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
+       // databaseReference = firebaseDatabase.getReference("MealInfo");
+        databaseReference=  firebaseDatabase.getInstance().getReference("userFavorites")
+                .child(auth.getCurrentUser().getUid());
         recyclerView = findViewById(R.id.rv_meals);
         recyclerViewofCategory=findViewById(R.id.rv_categories);
         recyclerViewofCountry=findViewById(R.id.rv_countries);
@@ -266,6 +268,14 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         Intent intent = new Intent(getApplicationContext(), IteamCategoryActivity.class);
         intent.putExtra("Category_KEY",category.getStrCategory());
         startActivity(intent);
+    }
+
+    @Override
+    public void OnCartAreaclick(Area area) {
+        Intent intent = new Intent(getApplicationContext(), IteamAreaActivity.class);
+        intent.putExtra("Area_KEY",area.getStrArea());
+        startActivity(intent);
+
     }
 
     @Override

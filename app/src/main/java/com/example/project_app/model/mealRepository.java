@@ -22,7 +22,7 @@ public interface mealRepository {
     public Observable<List<Meal>>  getAllMealsSearchCategory(NetworkCallback networkCallback, String wordCategory) ;
     public Observable<List<Meal>>  getAllMealsSearchIngredient(NetworkCallback networkCallback, String ingredient) ;
     public Observable<List<Area>>  getAllAreas(NetworkCallback networkCallback);
-    public void getAllMealsSearchAreat(NetworkCallback networkCallback, String area) ;
+    public  Observable<List<Meal>>  getAllMealsSearchArea(NetworkCallback networkCallback, String area) ;
 
 
 

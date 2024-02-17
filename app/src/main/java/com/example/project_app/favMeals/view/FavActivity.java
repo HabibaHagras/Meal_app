@@ -1,5 +1,6 @@
 package com.example.project_app.favMeals.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -32,6 +33,12 @@ import com.example.project_app.plan.view.Day_PlanActivity;
 import com.example.project_app.randomMeal.view.RandomMealActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +49,8 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     MealClient mealClient;
     FavAdapter favproductAdapter;
     AppDataBase dp;
+    private DatabaseReference userFavoriteRef;
+
     MealDAO DAO;
     FavPresenter favPresenter;
     private ActivityFavBinding binding;
@@ -79,7 +88,17 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         Log.i(TAG, "favPresenter: "+"   "+email);
 
         favPresenter.getMeal();
-
+//        FirebaseAuth auth = FirebaseAuth.getInstance();
+//        FirebaseUser currentUser = auth.getCurrentUser();
+//        userFavoriteRef = FirebaseDatabase.getInstance().getReference("userFavorites")
+//                .child(auth.getCurrentUser().getUid());
+//        if (currentUser != null) {
+//            String uidFromCurrentDevice = currentUser.getUid();
+//            userFavoriteRef = FirebaseDatabase.getInstance().getReference("userFavorites").child(uidFromCurrentDevice);
+//           fetchFavoriteMeals();
+//        } else {
+//            // Handle the case where the user is not authenticated
+//        }
 
 //        LiveData<List<Meal>> productList=DAO.getFavoriteMealsForUser(email);
 //        productList.observe(this, new Observer<List<Meal>>() {
@@ -155,11 +174,29 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
 
 
     }
+    private void fetchFavoriteMeals() {
+        userFavoriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Meal> favoriteMeals = new ArrayList<>();
+                for (DataSnapshot mealSnapshot : snapshot.getChildren()) {
+                    Meal meal = mealSnapshot.getValue(Meal.class);
+                    favoriteMeals.add(meal);
+                }
 
+                showdata(favoriteMeals);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle errors during data retrieval
+                Log.e(TAG, "Error fetching favorite meals: " + error.getMessage());
+                showErrorMsg("Error fetching favorite meals");
+            }
+        });}
     @Override
     public Context getContext() {
-        return this; // Assuming that FavActivity implements Context, which it does as it extends AppCompatActivity
-
+        return this;
     }
 
     @Override
@@ -167,4 +204,5 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         Toast.makeText(FavActivity.this,"DELETED",Toast.LENGTH_SHORT).show();
         deleteProduct(meal);
     }
+
 }

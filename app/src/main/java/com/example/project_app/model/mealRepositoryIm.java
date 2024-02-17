@@ -91,8 +91,8 @@ public class mealRepositoryIm implements mealRepository {
     }
 
     @Override
-    public void getAllMealsSearchAreat(NetworkCallback networkCallback, String area) {
-        remoteDataSource.makeNetwokCallSearchArea(networkCallback,area);
+    public Observable<List<Meal>> getAllMealsSearchArea(NetworkCallback networkCallback, String area) {
+       return remoteDataSource.makeNetwokCallSearchArea(networkCallback,area);
     }
 
 }

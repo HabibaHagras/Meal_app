@@ -109,7 +109,6 @@ public class SearchCategoryActivity extends AppCompatActivity implements AllSear
     @Override
     public void showdata(List<Meal> products) {
         if (products != null && products.isEmpty()) {
-            // Show a dialog indicating no meals found
             showNoMealsDialog();
         } else {
             searchAdapter.SetList(products);

@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Project_App"
         tools:targetApi="31">
         <activity
+            android:name=".IteamArea.IteamAreaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".searchArea.view.AreaSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".IteamMeal.view.IteamMealSelectedFromCategoryActivity"
             android:exported="false" />
         <activity

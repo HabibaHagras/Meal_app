@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.project_app.R;
 import com.example.project_app.search.view.SearchActivity;
+import com.example.project_app.searchArea.view.AreaSearchActivity;
 import com.example.project_app.searchCategory.view.SearchCategoryActivity;
 import com.example.project_app.searchIngredient.view.SearchIngredientActivity;
 
@@ -16,6 +17,7 @@ public class SearchByActivity extends AppCompatActivity {
     Button meal;
     Button cat;
     Button Ingredient;
+    Button Area;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class SearchByActivity extends AppCompatActivity {
         meal=findViewById(R.id.meal);
         cat=findViewById(R.id.Category);
         Ingredient=findViewById(R.id.Ingredient);
+        Area=findViewById(R.id.Area);
         meal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +46,13 @@ public class SearchByActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), SearchIngredientActivity.class));
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
+            }
+        });
+        Area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), AreaSearchActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
             }
         });

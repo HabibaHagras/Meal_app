@@ -68,11 +68,7 @@ public class PlanAdapter  extends  RecyclerView.Adapter<PlanAdapter.MyViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
-        TextView tvPrice;
-        TextView tvBrand;
-        TextView tvDesc;
         ImageView img;
-        TextView ratingBar;
         ImageButton Delete;
 
         public MyViewHolder(@NonNull View itemView) {

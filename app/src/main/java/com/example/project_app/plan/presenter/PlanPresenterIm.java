@@ -45,15 +45,6 @@ public class PlanPresenterIm implements PlanPresenter {
         return sp.getString("userEmail", "");
     }
     private List<Meal> filterMealsByEmail(List<Meal> allMeals, String userEmail ,String day) {
-//        List<Meal> userMeals = new ArrayList<>();
-//        for (Meal meal : allMeals) {
-//            if (meal.getUserEmail().equals(userEmail)) {
-//                Log.i(TAG, "filterMealsByEmail: "+userEmail);
-//                Log.i(TAG, "filterMealsByEmailMeal: "+meal.getUserEmail());
-//                userMeals.add(meal);
-//            }
-//        }
-//        return userMeals;
         List<Meal> userMeals = new ArrayList<>();
         for (Meal meal : allMeals) {
             if (meal != null && meal.getUserEmail() != null && meal.getUserEmail().equals(userEmail)&& meal.getDay() != null&& meal.getDay().equals(day)) {

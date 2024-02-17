@@ -30,7 +30,7 @@ import com.example.project_app.plan.presenter.PlanPresenterIm;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanDayActivity extends AppCompatActivity implements AllPlanView ,OnClickPlanListener{
+public class PlanDayActivity extends AppCompatActivity implements  OnClickPlanListener,AllPlanView{
     RecyclerView planRecyclerView;
     LinearLayoutManager linearLayoutManager;
     MealClient mealClient;
@@ -60,25 +60,30 @@ public class PlanDayActivity extends AppCompatActivity implements AllPlanView ,O
         dp=AppDataBase.getInstance(this);
         DAO=dp.getmealDAO();
         planAdapter.notifyDataSetChanged();
-        planPresenter=new PlanPresenterIm(this, mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
+       planPresenter=new PlanPresenterIm(this, mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                 MealLocalDataSourceIm.getInstance(this)));
-        LiveData<List<Meal>> productList=DAO.getFavoriteMealsPlansForUser(email,day);
-        productList.observe(this, new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(List<Meal> meals) {
-                Log.i(TAG, "onChanged: hereeeeeeeeeeeer");
-                planAdapter.SetList(meals);
-                planAdapter.notifyDataSetChanged();
+        planPresenter.getPlan();
 
-            }
-        });
+//        LiveData<List<Meal>> productList=DAO.getFavoriteMealsPlansForUser(email,day);
+//        productList.observe(this, new Observer<List<Meal>>() {
+//            @Override
+//            public void onChanged(List<Meal> meals) {
+//                Log.i(TAG, "onChanged: hereeeeeeeeeeeer");
+//                planAdapter.SetList(meals);
+//                planAdapter.notifyDataSetChanged();
+//
+//            }
+//        });
 
     }
 
     @Override
     public void showdata(List<Meal> products) {
-        planPresenter.getPlan();
+    //    planPresenter.getPlan();
 
+        planAdapter = new PlanAdapter(this,products,this);
+        planRecyclerView.setAdapter(planAdapter);
+        planAdapter.notifyDataSetChanged();
     }
 
     @Override

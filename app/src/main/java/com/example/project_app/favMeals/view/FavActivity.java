@@ -176,26 +176,7 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
 
 
     }
-    private void fetchFavoriteMeals() {
-        userFavoriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<Meal> favoriteMeals = new ArrayList<>();
-                for (DataSnapshot mealSnapshot : snapshot.getChildren()) {
-                    Meal meal = mealSnapshot.getValue(Meal.class);
-                    favoriteMeals.add(meal);
-                }
 
-                showdata(favoriteMeals);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle errors during data retrieval
-                Log.e(TAG, "Error fetching favorite meals: " + error.getMessage());
-                showErrorMsg("Error fetching favorite meals");
-            }
-        });}
     @Override
     public Context getContext() {
         return this;

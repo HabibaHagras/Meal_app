@@ -16,12 +16,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/food2" />
+
     <EditText
         android:id="@+id/searchEditTextCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:hint="Search Names"
+        android:hint="Search Categories"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/rv_searchCategory"
         app:layout_constraintEnd_toEndOf="parent"

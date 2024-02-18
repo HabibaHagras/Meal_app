@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_app.Auth.AuthActivity;
 import com.example.project_app.Day.view.DayActivity;
 import com.example.project_app.IteamMeal.presenter.IteamMealPresenterIm;
 import com.example.project_app.dp.MealLocalDataSourceIm;
@@ -199,30 +200,48 @@ public class IteamMealActivity extends AppCompatActivity   implements   IteamMea
     @Override
     public void oPutInFavClick(Meal meal) {
         Log.i(TAG, "oPutInFavClick: "+email);
-        meal.setUserEmail(email);
-        meal.setFav(true);
-        Toast.makeText(IteamMealActivity.this,"Added TO FAV",Toast.LENGTH_SHORT).show();
-        addProduct(meal);
+        if (email == null || email.trim().isEmpty()) {
+            Intent authIntent = new Intent(IteamMealActivity.this, AuthActivity.class);
+            startActivity(authIntent);
+            finish();}
+        else {
+            meal.setUserEmail(email);
+            meal.setFav(true);
+            Toast.makeText(IteamMealActivity.this, "Added TO FAV", Toast.LENGTH_SHORT).show();
+            addProduct(meal);
+        }
     }
 
     @Override
     public void OnPlanClick(Meal meal) {
-        Toast.makeText(IteamMealActivity.this,"Please Choose Day",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), DayActivity.class);
-        intent.putExtra("MEAL_OBJECT_KEY", meal);
-        startActivity(intent);
+        if (email == null || email.trim().isEmpty()) {
+            Intent authIntent = new Intent(IteamMealActivity.this, AuthActivity.class);
+            startActivity(authIntent);
+            finish();}
+        else {
+            Toast.makeText(IteamMealActivity.this, "Please Choose a Day", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+            intent.putExtra("MEAL_OBJECT_KEY", meal);
+            startActivity(intent);
+        }
     }
 
     @Override
     public void OnPlanFavClick(Meal meal) {
-        meal.setUserEmail(email);
-        meal.setFav(true);
-        addProduct(meal);
-        Toast.makeText(IteamMealActivity.this,"Added TO FAV",Toast.LENGTH_SHORT).show();
-        Toast.makeText(IteamMealActivity.this,"pls choose day",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), DayActivity.class);
-        intent.putExtra("MEAL_OBJECT_KEY", meal);
-        startActivity(intent);
+        if (email == null || email.trim().isEmpty()) {
+            Intent authIntent = new Intent(IteamMealActivity.this, AuthActivity.class);
+            startActivity(authIntent);
+            finish();}
+        else {
+            meal.setUserEmail(email);
+            meal.setFav(true);
+            addProduct(meal);
+            Toast.makeText(IteamMealActivity.this, "Added TO FAV", Toast.LENGTH_SHORT).show();
+            Toast.makeText(IteamMealActivity.this, "Please Choose a Day", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), DayActivity.class);
+            intent.putExtra("MEAL_OBJECT_KEY", meal);
+            startActivity(intent);
+        }
     }
 
 

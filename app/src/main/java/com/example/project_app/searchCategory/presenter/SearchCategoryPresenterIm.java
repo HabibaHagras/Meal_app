@@ -1,5 +1,7 @@
 package com.example.project_app.searchCategory.presenter;
 
+import android.annotation.SuppressLint;
+
 import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
@@ -15,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -62,22 +65,52 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
     }
 
 
+    @SuppressLint("CheckResult")
     @Override
     public void getsearchCategory(String categoryWord) {
         _allCategoryView.onLoading();
-        textChangeDisposable = Observable.just(categoryWord)
-                .flatMap(word -> Observable.fromArray(word)) // Split the word into characters
+        Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                    emitter.onNext(categoryWord);
+                    emitter.onComplete();
+                })
                 .map(String::toLowerCase)
-                .debounce(500, TimeUnit.MILLISECONDS)  // Introduce a delay of 500 milliseconds
+                .debounce(500, TimeUnit.MILLISECONDS)
                 .defaultIfEmpty("")
                 .observeOn(Schedulers.io())
-                .switchMap(lowercasedTerm -> _Repository.getAllMealsSearchCategory(this, categoryWord))
+                .concatMap(lowercasedTerm -> _Repository.getAllMealsSearchCategory(this, lowercasedTerm))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         meals -> _allCategoryView.showdata(meals),
-                        error_msg -> _allCategoryView.showErrorMsg("Sorry This Category isn't in Our Meals")
+                        error_msg -> _allCategoryView.showErrorMsg("Sorry, This Meal isn't in Our Meals")
                 );
-       // _Repository.getAllMealsSearchCategory(this,categoryWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
+//        Observable.just(categoryWord)
+//                .map(String::toLowerCase)
+//                .debounce(500, TimeUnit.MILLISECONDS)
+//               .defaultIfEmpty("")
+//                .observeOn(Schedulers.io())
+//                .concatMap(lowercasedTerm -> _Repository.getAllMealsSearchCategory(this, lowercasedTerm))
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        meals -> _allCategoryView.showdata(meals),
+//                        error_msg -> _allCategoryView.showErrorMsg("Sorry This Meal isn't in Our Meals")
+//                );
+//                .flatMap(word -> Observable.fromArray(word.split(""))) // Split the word into characters
+//                .map(String::toLowerCase)
+//                .debounce(500, TimeUnit.MILLISECONDS)
+//                .defaultIfEmpty("")
+//                .concatMap(lowercasedTerm -> _Repository.getAllMealsSearchCategory(this, lowercasedTerm))
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        meals -> {
+//                            _allCategoryView.showdata(meals);
+//                        },
+//                        error_msg -> {
+//                            _allCategoryView.showErrorMsg("Sorry, This Category isn't in Our Meals");
+//                        }
+//                );
+
+
+        // _Repository.getAllMealsSearchCategory(this,categoryWord).observeOn(AndroidSchedulers.mainThread()).subscribe(iteam -> _allCategoryView.showdata(iteam));
 
     }
     @Override

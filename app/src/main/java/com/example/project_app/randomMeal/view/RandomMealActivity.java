@@ -256,15 +256,25 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
 
     @Override
     public void oPutInFavClick(Meal meal) {
-        meal.setUserEmail(email);
-        meal.setFav(true);
-        Toast.makeText(RandomMealActivity.this,"added",Toast.LENGTH_SHORT).show();
-        addProduct(meal);
-
+        if (email == null || email.trim().isEmpty()) {
+            Intent authIntent = new Intent(RandomMealActivity.this, AuthActivity.class);
+            startActivity(authIntent);
+            finish();}
+        else {
+            meal.setUserEmail(email);
+            meal.setFav(true);
+            Toast.makeText(RandomMealActivity.this, "added", Toast.LENGTH_SHORT).show();
+            addProduct(meal);
+        }
     }
 
     @Override
     public void OnPlanClick(Meal meal) {
+        if (email == null || email.trim().isEmpty()) {
+            Intent authIntent = new Intent(RandomMealActivity.this, AuthActivity.class);
+            startActivity(authIntent);
+            finish();}
+        else {
       //  meal.setUserEmail(email);
         Toast.makeText(RandomMealActivity.this,"pls choose day",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), DayActivity.class);
@@ -272,7 +282,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         startActivity(intent);
        // addProduct(meal);
        // addPlan(meal);
-    }
+    }}
 
     @Override
     public void OnCartclick(Meal meal) {

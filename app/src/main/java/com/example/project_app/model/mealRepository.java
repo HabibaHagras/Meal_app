@@ -14,7 +14,7 @@ public interface mealRepository {
     public Flowable<List<Meal>> getStoredProduct();
     public Flowable<List<Meal>> getStoredProductforUser(String user);
     public Completable insertMeal(Meal meal);
-    public  void  deleteMeal(Meal meal);
+    public  Completable  deleteMeal(Meal meal);
     public Observable<List<Meal>> getAllMeals(NetworkCallback networkCallback);
     public Observable<List<Category>> getAllCategories(NetworkCallback networkCallback);
     public Completable  insertMeal(Meal meal,String DAY);

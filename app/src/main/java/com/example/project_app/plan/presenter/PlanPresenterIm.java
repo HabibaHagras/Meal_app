@@ -55,7 +55,14 @@ public class PlanPresenterIm implements PlanPresenter {
     }
     @Override
     public void deleteproductPlan(Meal meal) {
-        _Repository.deleteMeal(meal);
+        _Repository.deleteMeal(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> _view.showErrorMsg("Add to favourite successfully"),
+                        error -> _view.showErrorMsg(error.getMessage())
+                );
+//        _Repository.deleteMeal(meal);
 
 
     }

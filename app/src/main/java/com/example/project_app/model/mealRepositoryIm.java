@@ -49,8 +49,8 @@ public class mealRepositoryIm implements mealRepository {
     }
 
     @Override
-    public void deleteMeal(Meal meal) {
-        localDataSource.deleteMeal(meal);
+    public Completable deleteMeal(Meal meal) {
+      return  localDataSource.deleteMeal(meal);
 
     }
 

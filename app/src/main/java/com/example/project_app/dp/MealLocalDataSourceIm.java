@@ -56,14 +56,14 @@ public  static MealLocalDataSourceIm getInstance(Context context){
     }
 
     @Override
-    public void deleteMeal(Meal meal) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                dao.delete(meal);
-            }
-        }).start();
-
+    public Completable deleteMeal(Meal meal) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                dao.delete(meal);
+//            }
+//        }).start();
+    return    dao.delete(meal);
     }
 
     @Override

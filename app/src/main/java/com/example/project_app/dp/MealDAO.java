@@ -23,7 +23,7 @@ public interface MealDAO {
     Completable insert(Meal meal);
 
     @Delete
-    void delete (Meal meal);
+    Completable delete (Meal meal);
     @Query("SELECT * FROM meal_table WHERE userEmail = :userEmail")
     Flowable<List<Meal>> getFavoriteMealsForUser(String userEmail);
 

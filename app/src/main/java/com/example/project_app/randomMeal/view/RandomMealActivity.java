@@ -201,7 +201,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     @Override
     public void showdata(List<Meal> products) {
         if (isNetworkAvailable()) {
-            progressBar.setVisibility(View.VISIBLE);
             productAdapter.SetList(products);
             productAdapter.notifyDataSetChanged();
         }else {

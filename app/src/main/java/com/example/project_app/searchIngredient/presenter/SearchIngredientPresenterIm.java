@@ -1,5 +1,7 @@
 package com.example.project_app.searchIngredient.presenter;
 
+import android.util.Log;
+
 import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
 import com.example.project_app.model.Meal;
@@ -35,7 +37,7 @@ public class SearchIngredientPresenterIm  implements  SearchIngredientPresenter 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         meals -> searchIngredientView.showdata(meals),
-                        error_msg -> searchIngredientView.showErrorMsg("Sorry This Ingredient isn't in Our Meals")
+                        error_msg -> Log.i("TAG", "getsearchIngredient: "+"Sorry This Ingredient isn't in Our Meals")
                 );
 
 //        _Repository

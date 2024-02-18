@@ -1,6 +1,7 @@
 package com.example.project_app.searchCategory.presenter;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 
 import com.example.project_app.model.Area;
 import com.example.project_app.model.Category;
@@ -81,7 +82,7 @@ public class SearchCategoryPresenterIm implements SearchCategoryPresenter, Netwo
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         meals -> _allCategoryView.showdata(meals),
-                        error_msg -> _allCategoryView.showErrorMsg("Sorry, This Meal isn't in Our Meals")
+                        error_msg -> Log.i("TAG", "getsearchCategory: "+"Sorry, This Meal isn't in Our Meals")
                 );
 //        Observable.just(categoryWord)
 //                .map(String::toLowerCase)

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -14,9 +17,62 @@
         android:theme="@style/Theme.Project_App"
         tools:targetApi="31">
         <activity
-            android:name=".randomMeal.view.RandomMealActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:name=".Auth.SigninGoogleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IteamArea.IteamAreaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".searchArea.view.AreaSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IteamMeal.view.IteamMealSelectedFromCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IteamCategory.view.IteamCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IteamMeal.view.IteamMealActivity"
+            android:exported="false" />
+        <activity
+            android:name=".searchIngredient.view.SearchIngredientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.SearchByActivity"
+            android:exported="false" />
+        <activity
+            android:name=".searchCategory.view.SearchCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".search.view.kkk"
+            android:exported="false" />
+        <activity
+            android:name=".search.view.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".plan.view.Day_PlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".plan.view.PlanDayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Day.view.DayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.AuthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Auth.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".favMeals.view.FavActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,15 +80,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".randomMeal.view.RandomMealActivity"
+            android:exported="false"
+            android:label="@string/app_name" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false"/>
-<!--            android:label="@string/app_name">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+            android:exported="false" />
     </application>
 
 </manifest>

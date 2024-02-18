@@ -8,6 +8,10 @@ import com.example.project_app.network.NetworkCallback;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
+
 public class mealRepositoryIm implements mealRepository {
     MealRemoteDataSource remoteDataSource;
 
@@ -29,30 +33,66 @@ public class mealRepositoryIm implements mealRepository {
     }
 
     @Override
-    public LiveData<List<Meal>> getStoredProduct() {
+    public Flowable<List<Meal>> getStoredProduct() {
         return localDataSource.getAllStoredMeals();
     }
 
     @Override
-    public void insertMeal(Meal meal) {
-        localDataSource.insertMeal(meal);
+    public Flowable<List<Meal>> getStoredProductforUser(String user) {
+        return localDataSource.getAllStoredMealsForUser(user);
+    }
+
+    @Override
+    public Completable insertMeal(Meal meal) {
+       return localDataSource.insertMeal(meal);
 
     }
 
     @Override
-    public void deleteMeal(Meal meal) {
-        localDataSource.deleteMeal(meal);
+    public Completable deleteMeal(Meal meal) {
+      return  localDataSource.deleteMeal(meal);
 
     }
 
     @Override
-    public void getAllMeals(NetworkCallback networkCallback) {
-        remoteDataSource.makeNetwokCall(networkCallback);
+    public Observable<List<Meal>> getAllMeals(NetworkCallback networkCallback) {
+      return   remoteDataSource.makeNetwokCall(networkCallback);
     }
 
     @Override
-    public void getAllCategories(NetworkCallback networkCallback) {
-               remoteDataSource.makeNetwokCallCategory(networkCallback);
+    public Observable<List<Category>> getAllCategories(NetworkCallback networkCallback) {
+           return    remoteDataSource.makeNetwokCallCategory(networkCallback);
 
     }
+
+    @Override
+    public Completable insertMeal(Meal meal, String DAY) {
+        return localDataSource.insertMealPlan(meal,DAY);
+
+    }
+
+    @Override
+    public Observable<List<Meal>> getAllMealsSearch(NetworkCallback networkCallback, String wordMeaL) {
+      return  remoteDataSource.makeNetwokCallSearch(networkCallback,wordMeaL);
+    }
+    @Override
+    public Observable<List<Meal>> getAllMealsSearchCategory(NetworkCallback networkCallback, String wordCategory) {
+      return  remoteDataSource.makeNetwokCallSearchCategory(networkCallback,wordCategory);
+    }
+
+    @Override
+    public Observable<List<Meal>> getAllMealsSearchIngredient(NetworkCallback networkCallback, String ingredient) {
+       return remoteDataSource.makeNetwokCallSearchIngredient(networkCallback,ingredient);
+    }
+
+    @Override
+    public Observable<List<Area>>  getAllAreas(NetworkCallback networkCallback) {
+       return remoteDataSource.makeNetwokCallArea(networkCallback);
+    }
+
+    @Override
+    public Observable<List<Meal>> getAllMealsSearchArea(NetworkCallback networkCallback, String area) {
+       return remoteDataSource.makeNetwokCallSearchArea(networkCallback,area);
+    }
+
 }

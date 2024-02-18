@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -54,34 +55,30 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Meal product = products.get(position);
-//        holder.tvTitle.setText("Title:  " +products.get(position).getTitle());
-//        holder.tvPrice.setText("Price:  " + products.get(position).getProductPrice () );
-//        holder.tvBrand.setText("Brand:  " +products.get(position).getProductBrand());
-//        holder.tvDesc.setText("Desc:  " +products.get(position).getProductcategory());
-//        holder.ratingBar.setText("Rating:  " +products.get(position).getRating().toString());
-//        Glide.with(context).load(products.get(position).getProductthumbnail()).into(holder.img);
         holder.tvTitle.setText("Title of Meal :  " +products.get(position).getStrMeal());
 
         Glide.with(context).load(products.get(position).getStrMealThumb()).into(holder.img);
+        holder.Fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listner.oPutInFavClick(product);
 
+            }
+        });
+        holder.Plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listner.OnPlanClick(product);
 
-
-
-//        class Downloader extends AsyncTask<String,Void, Bitmap> {
-//
-//            @Override
-//            protected Bitmap doInBackground(String... url) {
-//                return downloadImage(url[0]);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Bitmap bitmap) {
-//                super.onPostExecute(bitmap);
-//                holder.img.setImageBitmap(bitmap);
-//            }
-//        }
-//        Downloader downloader =new Downloader();
-//        downloader.execute(products.get(position).getProductthumbnail());
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the listener method for the card view click
+                listner.OnCartclick(product);
+            }
+        });
 
     }
 
@@ -93,17 +90,18 @@ public  class RycAdapter extends RecyclerView.Adapter<RycAdapter.MyViewHolder> {
     class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle;
-        TextView tvPrice;
-        TextView tvBrand;
-        TextView tvDesc;
+
         ImageView img;
-        TextView ratingBar;
-        Button Fav;
+
+        ImageButton Fav;
+        ImageButton Plan;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.Name_of_meal);
             img=itemView.findViewById(R.id.imageView);
+            Fav=itemView.findViewById(R.id.fav_button);
+            Plan=itemView.findViewById(R.id.olan_button);
 
 
 

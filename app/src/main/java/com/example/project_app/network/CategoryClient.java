@@ -34,20 +34,20 @@ public class CategoryClient {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://www.themealdb.com/api/json/v1/1/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         MealService myService = retrofit.create(MealService.class);
-        Call<mealResponse> call = myService.getMeals();
-        call.enqueue(new Callback<mealResponse>(){
-
-
-            @Override
-            public void onResponse(Call<mealResponse> call, Response<mealResponse> response) {
-                networkCallback.onSucessResult(response.body().getMeals());
-            }
-
-            @Override
-            public void onFailure(Call<mealResponse> call, Throwable t) {
-                networkCallback.onFailuer(t.getMessage());
-
-            }
-        });
+        //Call<mealResponse> call = myService.getMeals();
+//        call.enqueue(new Callback<mealResponse>(){
+//
+//
+//            @Override
+//            public void onResponse(Call<mealResponse> call, Response<mealResponse> response) {
+//                networkCallback.onSucessResult(response.body().getMeals());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<mealResponse> call, Throwable t) {
+//                networkCallback.onFailuer(t.getMessage());
+//
+//            }
+//        });
     }
 }

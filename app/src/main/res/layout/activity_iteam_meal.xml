@@ -1,0 +1,151 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha=".3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/food2" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Meal Image -->
+                <ImageView
+                    android:id="@+id/imageViewMeal"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_foreground" />
+
+                <!-- Meal Name -->
+                <TextView
+                    android:id="@+id/textViewMealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Tortang Talong"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <!-- Meal Category and Area -->
+                <TextView
+                    android:id="@+id/textViewCategoryArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Vegetarian | Filipino"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray" />
+
+                <!-- Ingredients -->
+                <TextView
+                    android:id="@+id/textViewIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ingredients:"
+                    android:textStyle="bold" />
+
+                <!-- Instructions -->
+                <TextView
+                    android:id="@+id/textViewInstructions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Instructions:"
+                    android:textStyle="bold" />
+
+                <!-- Source Link -->
+                <TextView
+                    android:id="@+id/textViewSource"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:autoLink="web"
+                    android:text="Source: https://www.sainsburysmagazine.co.uk/recipes/mains/tortang-talong"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <WebView
+                    android:id="@+id/webView"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="16dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/favMeal_button"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="160dp"
+                    android:layout_height="65dp"
+                    android:text="Add To Fav Only"
+                    app:icon="@drawable/favorite_white_24dp"
+                    app:iconGravity="start"
+                    tools:text="Add TO Fav Only" />
+
+                <!-- Calendar Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/olanMeal_button"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="166dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="Add To Plan Only"
+                    android:background="#BC5555"
+                    app:icon="@drawable/calendar_today_black_24dp"
+                    app:iconGravity="start"
+                    tools:text="Add To Plan Only" />
+            </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/both_button"
+                    style="@style/Widget.MaterialComponents.Button.Icon"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:text="Add To Fav  Plan"
+                    app:iconGravity="start"
+                    tools:text="Add To Fav and Plan" />
+                <!--                <Button-->
+<!--                    android:id="@+id/ADDtoFav"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:srcCompat="@drawable/calendar_today_black_24dp"-->
+<!--                    android:padding="16dp"-->
+<!--                    android:text="Search"-->
+<!--                    android:textSize="24sp" />-->
+<!--                <VideoView&ndash;&gt;-->
+                <!--                    android:id="@+id/videoView"-->
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</ScrollView>

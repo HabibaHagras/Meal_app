@@ -54,9 +54,16 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
 //        holder.tvDesc.setText("Desc:  " +products.get(position).getProductcategory());
 //        holder.ratingBar.setText("Rating:  " +products.get(position).getRating().toString());
 //        Glide.with(context).load(products.get(position).getProductthumbnail()).into(holder.img);
-        holder.tvCategory.setText("category of Meal :  " +products.get(position).getStrCategory());
+        holder.tvCategory.setText(products.get(position).getStrCategory());
 
         Glide.with(context).load(products.get(position).getStrCategoryThumb()).into(holder.img);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Call the listener method for the card view click
+                listner.OnCartCategoryclick(product);
+            }
+        });
 
     }
 

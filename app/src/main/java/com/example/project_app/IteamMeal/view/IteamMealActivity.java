@@ -49,6 +49,7 @@ import com.example.project_app.randomMeal.view.PutInFavListener;
 import com.example.project_app.randomMeal.view.RycAdapter;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;

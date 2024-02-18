@@ -58,5 +58,18 @@
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Category" />
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@drawable/custom_editbox"-->
+<!--        android:elevation="2dp"-->
+<!--        app:itemIconSize="30dp"-->
+<!--        app:itemRippleColor="@android:color/transparent"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:menu="@menu/bottom_nav_menu"-->
+<!--        tools:layout_editor_absoluteX="-17dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

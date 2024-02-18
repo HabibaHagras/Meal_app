@@ -141,7 +141,7 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
                 }   else
                 if (item.getItemId() == R.id.searchguest) {
                     // startActivity(new Intent(getApplicationContext(), RandomMealActivity.class));
-                    Intent intent = new Intent(getApplicationContext(), RandomMealActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SearchByActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_in_left);
                     finish();

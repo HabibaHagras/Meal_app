@@ -39,6 +39,10 @@ import com.example.project_app.model.mealRepositoryIm;
 import com.example.project_app.network.MealClient;
 import com.example.project_app.network.MealRemoteDataSourceIm;
 import com.example.project_app.plan.view.Day_PlanActivity;
+import com.example.project_app.randomMeal.presenter.AllAreaPresenter;
+import com.example.project_app.randomMeal.presenter.AllAreaPresenterIm;
+import com.example.project_app.randomMeal.presenter.AllCategoryPresenter;
+import com.example.project_app.randomMeal.presenter.AllCategoryPresenterIm;
 import com.example.project_app.randomMeal.presenter.AllMealPresenter;
 import com.example.project_app.randomMeal.presenter.AllMealPresenterIm;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -55,7 +59,6 @@ import java.util.List;
 public class RandomMealActivity extends AppCompatActivity implements   PutInFavListener , AllMealView  ,AllCategoryView ,AllAreaView{
     RecyclerView recyclerView;
     private FirebaseAuth auth;
-
     RecyclerView recyclerViewofCategory;
     RecyclerView recyclerViewofCountry;
     LinearLayoutManager linearLayoutManager;
@@ -63,10 +66,9 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     LinearLayoutManager linearLayoutManager2;
     MealClient mealClient;
     RycAdapter productAdapter;
-    AppDataBase dp;
-    MealDAO DAO;
-    List<Meal> mealList;
     AllMealPresenter allMealPresenter;
+    AllCategoryPresenter allCategoryPresenter;
+    AllAreaPresenter allAreaPresenter;
     CategoryAdapter categoryAdapter;
     AreaAdapter areaAdapter;
     private ActivityRandomMealBinding binding;
@@ -76,8 +78,6 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
     SharedPreferences sp;
     FirebaseDatabase firebaseDatabase;
 
-    // creating a variable for our Database
-    // Reference for Firebase.
     DatabaseReference databaseReference;
     ProgressBar progressBar;
 
@@ -120,15 +120,20 @@ public class RandomMealActivity extends AppCompatActivity implements   PutInFavL
         recyclerView.setAdapter(productAdapter);
         categoryAdapter = new CategoryAdapter(this, new ArrayList<>(),this);
         recyclerViewofCategory.setAdapter(categoryAdapter);
-        dp=AppDataBase.getInstance(this);
-        DAO=dp.getmealDAO();
         allMealPresenter= new AllMealPresenterIm(this,
                 mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
                 MealLocalDataSourceIm.getInstance(this)
-                ),this,this);
+                ));
+
+        allCategoryPresenter=new AllCategoryPresenterIm(this,mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
+                MealLocalDataSourceIm.getInstance(this)
+        ));
+        allAreaPresenter=new AllAreaPresenterIm(this,mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
+                MealLocalDataSourceIm.getInstance(this)
+        ));
         allMealPresenter.getMeal();
-        allMealPresenter.getCtegory();
-        allMealPresenter.getArea();
+        allCategoryPresenter.getCtegory();
+        allAreaPresenter.getArea();
         skip = getIntent().getBooleanExtra("skip",false);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.getMenu().clear();

@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.project_app.Auth.AuthActivity;
@@ -61,7 +63,7 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
     private FirebaseAuth auth;
     private static final String TAG = "MealLocalDataSourceIm";
 
-
+    Button sync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         binding = ActivityFavBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_fav);
+        sync=findViewById(R.id.sync_button);
         auth = FirebaseAuth.getInstance();
         currentUserEmail = getIntent().getStringExtra("currentUserEmail");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("useremail", Context.MODE_PRIVATE);
@@ -82,7 +85,8 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         favRecyclerView.setAdapter(favproductAdapter);
         favRecyclerView.setLayoutManager(linearLayoutManager);
         dp=AppDataBase.getInstance(this);
-        DAO=dp.getmealDAO();
+        auth = FirebaseAuth.getInstance();
+
         // favproductAdapter.SetList( repo.getStoredProduct());
         favproductAdapter.notifyDataSetChanged();
         favPresenter=new FavPresenterIm(this, mealRepositoryIm.getInstance(MealRemoteDataSourceIm.getInstance(),
@@ -111,6 +115,13 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
 //
 //            }
 //        });
+        sync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OnSyncClick();
+
+        }});
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.bottom_fav);
@@ -195,4 +206,37 @@ public class FavActivity extends AppCompatActivity implements OnClickFavListener
         startActivity(intent);
     }
 
-}
+    @Override
+    public void OnSyncClick() {
+        if (auth.getCurrentUser() != null) {
+            String uid = auth.getCurrentUser().getUid();
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("userFavorites").child(uid);
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<Meal> favoriteMeals = new ArrayList<>();
+
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        // Assuming Meal class has a constructor that accepts a DataSnapshot
+                        Meal meal = dataSnapshot.getValue(Meal.class);
+
+                        if (meal != null) {
+                            favoriteMeals.add(meal);
+                        }
+                    }
+
+                    // Update your RecyclerView with the retrieved favoriteMeals list
+                    FavAdapter favAdapter = new FavAdapter(FavActivity.this, favoriteMeals, FavActivity.this);
+                    favRecyclerView.setAdapter(favAdapter);
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e(TAG, "Failed to read userFavorites", error.toException());
+                }
+            });
+        }
+    }
+    }
+
